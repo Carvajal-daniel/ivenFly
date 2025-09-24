@@ -7,7 +7,7 @@ const HeroDecorations = () => {
   return (
     <>
       {/* Polígono Colorido */}
-   <GradientBg className={`hidden md:block absolute md:z-50 -top-20 -left-20 md:-top-5 md:-left-8  w-[40rem] h-[35rem] bg-gradient-to-br from-blue-700 via-pink-500 to-primary rounded-full blur-[5rem]`}
+   <GradientBg className={`hidden md:block absolute md:z-50 -top-20 -left-20 md:-top-5 md:-left-8  w-[30rem] h-[35rem] bg-gradient-to-br from-blue-700 via-pink-500 to-primary rounded-full blur-[5rem]`}
       />  
 
       {/* Bolinhas Flutuantes */}
