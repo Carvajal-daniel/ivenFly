@@ -1,7 +1,6 @@
 "use client";
 
-import { Shield, Check, Headset, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {  Check, Headset } from "lucide-react";
 import { motion } from "framer-motion";
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };

@@ -10,14 +10,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FeatureItem } from "./FeatureItem";
-import { motion } from "framer-motion";
 import GradientBg from "@/lib/gradient";
+import type { LucideIcon } from "lucide-react";
 
 interface PlanCardProps {
   title: string;
   description: string;
   price: string;
-  features: { icon: any; text: string }[];
+  features: { icon: LucideIcon; text: string }[];
   highlight?: boolean;
   buttonText?: string;
 }
