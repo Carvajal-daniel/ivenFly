@@ -1,0 +1,49 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const navItems = [
+  { name: "Services", href: "#services" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Solutions", href: "#solutions" },
+  { name: "About", href: "#about" },
+  { name: "Contact", href: "#contact" },
+];
+
+const navVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1 },
+  }),
+};
+
+export const DesktopNavigation = () => {
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  return (
+    <div className="hidden md:flex items-center space-x-8">
+      {navItems.map((item, index) => (
+        <motion.a
+          key={item.name}
+          href={item.href}
+          onClick={(e) => handleScroll(e, item.href)}
+          className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+          custom={index}
+          initial="hidden"
+          animate="visible"
+          variants={navVariants}
+        >
+          {item.name}
+        </motion.a>
+      ))}
+    </div>
+  );
+};
