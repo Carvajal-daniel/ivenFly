@@ -12,13 +12,13 @@ const HeroDecorations = () => {
 
       {/* Bolinhas Flutuantes */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-4 h-4 animate-pulse bg-gradient-to-br from-blue-700 to-primary  rounded-full"
+        className="hidden md:block absolute top-1/4 right-1/4 w-4 h-4 animate-pulse bg-gradient-to-br from-blue-700 to-primary  rounded-full"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.2 }}
       />
       <motion.div
-        className="absolute bottom-[20rem] left-[40rem] w-6 h-6 animate-pulse bg-gradient-to-br from-blue-700 to-primary rounded-full"
+        className="hidden md:block absolute bottom-[20rem] left-[40rem] w-6 h-6 animate-pulse bg-gradient-to-br from-blue-700 to-primary rounded-full"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}

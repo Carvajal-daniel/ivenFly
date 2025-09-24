@@ -38,9 +38,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>Nome completo</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Seu nome completo" className="pl-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center">
+                  <User className="absolute left-3  h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="Seu nome completo" className="pl-10 py-5 bg-white border-border focus:ring-primary" {...field} />
                 </div>
               </FormControl>
               <FormMessage />
@@ -56,9 +56,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="seu@email.com" className="pl-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center">
+                  <Mail className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="seu@email.com" className="pl-10 py-5 bg-white border-border focus:ring-primary" {...field} />
                 </div>
               </FormControl>
               <FormMessage />
@@ -74,9 +74,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>Senha</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input type={showPassword ? "text" : "password"} placeholder="Crie uma senha forte" className="pl-10 pr-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center">
+                  <Lock className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                  <Input type={showPassword ? "text" : "password"} placeholder="Crie uma senha forte" className="pl-10 py-5 pr-10 bg-white border-border focus:ring-primary" {...field} />
                   <Button
                     type="button"
                     variant="ghost"
@@ -101,9 +101,9 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>Confirmar senha</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input type={showConfirmPassword ? "text" : "password"} placeholder="Confirme sua senha" className="pl-10 pr-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center">
+                  <Lock className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                  <Input type={showConfirmPassword ? "text" : "password"} placeholder="Confirme sua senha" className="pl-10 pr-10 py-5 bg-white border-border focus:ring-primary" {...field} />
                   <Button
                     type="button"
                     variant="ghost"
@@ -120,7 +120,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ toast }) => {
           )}
         />
 
-        <Button type="submit" className="w-full gradient-primary text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group">
+        <Button type="submit" className="w-full gradient-primary py-6 text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group">
           Criar conta
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>

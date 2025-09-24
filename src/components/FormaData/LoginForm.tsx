@@ -36,9 +36,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>E-mail</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="seu@email.com" className="pl-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center justify-center">
+                  <Mail className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                  <Input placeholder="seu@email.com" className="pl-10 py-6 bg-white border-border focus:ring-primary" {...field} />
                 </div>
               </FormControl>
               <FormMessage />
@@ -53,9 +53,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toast }) => {
             <FormItem>
               <FormLabel>Senha</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input type={showPassword ? "text" : "password"} placeholder="Digite sua senha" className="pl-10 pr-10 bg-input border-border focus:ring-primary" {...field} />
+                <div className="relative flex items-center justify-center">
+                  <Lock className="absolute left-3  h-4 w-4 text-muted-foreground" />
+                  <Input type={showPassword ? "text" : "password"} placeholder="Digite sua senha" className="pl-10 pr-10 py-6 bg-white border-border focus:ring-primary" {...field} />
                   <Button
                     type="button"
                     variant="ghost"
@@ -72,7 +72,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ toast }) => {
           )}
         />
 
-        <Button type="submit" className="w-full gradient-primary text-primary-foreground shadow-elegant hover:shadow-glow transition-all duration-300 group">
+        <Button type="submit" className="w-full gradient-primary text-primary-foreground shadow-elegant hover:shadow-glow py-6 transition-all duration-300 group">
           Entrar na conta
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>

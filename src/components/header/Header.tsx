@@ -28,9 +28,20 @@ const Header = () => {
         <Logo />
         <DesktopNavigation />
         <DesktopButtons />
-        <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+       <button
+  className="md:hidden p-2"
+  onClick={() => setIsOpen(!isOpen)}
+>
+  <motion.div
+    key={isOpen ? "close" : "menu"}
+    initial={{ rotate: -90, opacity: 0 }}
+    animate={{ rotate: 0, opacity: 1 }}
+    transition={{ duration: 0.3, ease: "easeOut" }}
+  >
+    {isOpen ? <X size={24} /> : <Menu size={24} />}
+  </motion.div>
+</button>
+
       </div>
       <MobileNavigation isOpen={isOpen} setIsOpen={setIsOpen} />
     </nav>
