@@ -1,5 +1,5 @@
 import Hero from "@/components/Hero/Hero"
-import Services from "@/components/Services"
+import Services from "@/components/services/Services"
 import Header from "@/components/header/Header"
 import { SubscriptionPlans } from "@/components/Pricing/SubscriptionPlans"
 

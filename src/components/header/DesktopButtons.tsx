@@ -8,13 +8,15 @@ export const DesktopButtons = () => (
   <div className="hidden md:flex items-center space-x-4">
     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
       <Link href="/auth">
-        <Button type="button" variant="outline" size="sm">
+        <Button type="button" variant="outline" size="sm" className="text-foreground hover:cursor-pointer border shadow-elegant py-4">
           Login
         </Button>
       </Link>
     </motion.div>
     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-      <Button className="gradient-primary border-0 shadow-elegant">Get Started</Button>
+     <Link href="/auth">
+        <Button className="gradient-primary hover:cursor-pointer border-0 shadow-elegant">Get Started</Button>
+      </Link>
     </motion.div>
   </div>
 );

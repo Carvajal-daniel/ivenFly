@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const navItems = [
   { name: "Services", href: "#services" },
@@ -16,7 +17,10 @@ interface MobileProps {
   setIsOpen: (state: boolean) => void;
 }
 
-export const MobileNavigation: React.FC<MobileProps> = ({ isOpen, setIsOpen }) => (
+export const MobileNavigation: React.FC<MobileProps> = ({
+  isOpen,
+  setIsOpen,
+}) => (
   <AnimatePresence>
     {isOpen && (
       <motion.div
@@ -24,15 +28,15 @@ export const MobileNavigation: React.FC<MobileProps> = ({ isOpen, setIsOpen }) =
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
-        className="md:hidden mt-4 bg-background/70 backdrop-blur-md border border-border rounded-lg shadow-lg overflow-hidden"
+        className="md:hidden  bg-background/70 backdrop-blur-md border border-border/20 rounded-b-lg shadow-lg overflow-hidden"
       >
-        <div className="flex flex-col p-4 space-y-4">
+        <div className=" flex flex-col items-center justify-center p-4 space-y-10 py-10 ">
           {navItems.map((item, index) => (
             <motion.a
               key={item.name}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+              className="text-muted-foreground hover:text-foreground text-4xl transition-colors font-medium"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.05 * index }}
@@ -40,12 +44,36 @@ export const MobileNavigation: React.FC<MobileProps> = ({ isOpen, setIsOpen }) =
               {item.name}
             </motion.a>
           ))}
-          <div className="flex flex-col space-y-2 pt-4">
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-              <Button variant="outline" size="sm" onClick={() => setIsOpen(false)}>Login</Button>
+          <div className="flex flex-col items-center space-y-4 pt-4">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Link href="/auth">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-foreground/70 hover:cursor-pointer border shadow-elegant py-5 px-20"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Login
+                </Button>
+              </Link>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
-              <Button className="gradient-primary border-0 shadow-elegant" onClick={() => setIsOpen(false)}>Get Started</Button>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <Link href="/auth">
+                <Button
+                  className="gradient-primary hover:cursor-pointer border-0 shadow-elegant py-5 px-20"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>

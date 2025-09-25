@@ -94,7 +94,7 @@
   --accent: oklch(0.274 0.006 286.033);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --border: oklch(1 0 0 / 0%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.541 0.281 293.009);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -146,9 +146,9 @@
     --ring: 226 75% 55%;
     
     /* 1Uply brand gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsl(226 75% 55%), hsla(336, 75%, 65%, 1.00));
+    --gradient-primary: linear-gradient(135deg, hsla(226, 67%, 52%, 1.00), hsla(336, 75%, 65%, 1.00));
     --gradient-accent: linear-gradient(135deg, hsl(270 75% 65%), hsl(315 75% 65%), hsl(0 75% 65%));
-    --gradient-polygon: linear-gradient(45deg, hsl(226 100% 70%), hsl(270 100% 75%), hsl(315 100% 70%));
+    --gradient-polygon: linear-gradient(45deg, hsla(151, 100%, 70%, 1.00), hsla(193, 75%, 38%, 1.00), hsl(315 100% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(217 12% 99%), hsl(226 25% 96%));
     
     /* Shadows and effects */
