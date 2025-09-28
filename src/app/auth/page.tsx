@@ -1,8 +1,6 @@
-import AuthForm from "@/components/FormaData/AuthForm";
+import AuthContainer from "@/components/loginForm/AuthContainer";
 
 
-const Index = () => {
-  return <AuthForm />;
-};
-
-export default Index;
+export default function AuthPage() {
+  return <AuthContainer />;
+}

@@ -7,6 +7,8 @@ import { DesktopNavigation } from "./DesktopNavigation";
 import { DesktopButtons } from "./DesktopButtons";
 import { MobileNavigation } from "./MobileNavigation";
 import Link from "next/link";
+import imageLogo from "../../../public/assets/logo.png";
+import Image from "next/image";
 
 const Logo = () => (
   <motion.div
@@ -14,11 +16,15 @@ const Logo = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3 }}
   >
-    <Link href="/" className="flex items-center">
-      <span className="text-2xl font-semibold text-black">Iven</span>
-      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-400 rounded-lg flex items-center justify-center">
-        <span className="text-primary-foreground font-bold text-lg">Fly</span>
-      </div>
+    <Link href="/" className="flex items-center ">
+      <Image
+        className=" -mr-8 -ml-[20%]"
+        width={100}
+        height={100}
+        src={imageLogo}
+        alt="Logo"
+      />
+      <span className="text-2xl font-bold text-foreground/80">Uplys</span>
     </Link>
   </motion.div>
 );
@@ -42,11 +48,11 @@ const Header = () => {
         scrolled ? "border-b border-border/50" : ""
       }`}
     >
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-2 py-1 flex items-center justify-between">
         <Logo />
         <DesktopNavigation />
         <DesktopButtons />
-        <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}  aria-label={isOpen ? "Fechar menu" : "Abrir menu"}>
           <motion.div
             key={isOpen ? "close" : "menu"}
             initial={{ rotate: -90, opacity: 0 }}
