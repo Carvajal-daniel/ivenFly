@@ -115,17 +115,18 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5803/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.toLowerCase().trim(),
-          cpf: cpf.replace(/\D/g, ""),
-          phone: phone.replace(/\D/g, ""),
-          password,
-        }),
-      });
+   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: name.trim(),
+    email: email.toLowerCase().trim(),
+    cpf: cpf.replace(/\D/g, ""),
+    phone: phone.replace(/\D/g, ""),
+    password,
+  }),
+});
+
 
       let data: ApiResponse = {};
       try {
