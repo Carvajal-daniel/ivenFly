@@ -146,7 +146,7 @@
     --ring: 226 75% 55%;
     
     /* 1Uply brand gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsla(226, 67%, 52%, 1.00), hsla(336, 75%, 65%, 1.00));
+    --gradient-primary: linear-gradient(135deg, hsla(226, 67%, 52%, 1.00), hsla(336, 77%, 57%, 1.00));
     --gradient-accent: linear-gradient(135deg, hsl(270 75% 65%), hsl(315 75% 65%), hsl(0 75% 65%));
     --gradient-polygon: linear-gradient(45deg, hsla(151, 100%, 70%, 1.00), hsla(193, 75%, 38%, 1.00), hsl(315 100% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(217 12% 99%), hsl(226 25% 96%));
@@ -289,3 +289,113 @@
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; }
 }
+
+
+
+
+
+/* Estilos de Cores Customizadas para o Logo e Métricas */
+.uplys-logo {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #facc15 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.uplys-metric {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Estilos de Container e Transição de Cena */
+.scene {
+    @apply absolute w-full h-full flex items-center justify-center opacity-0 transition-opacity duration-1000 ease-in-out;
+}
+
+.scene.active {
+    @apply opacity-100;
+}
+
+/* Base para Cards e Itens com Animação */
+.card-animated,
+.insight-card-animated,
+.post-card-animated,
+.summary-item-animated {
+    opacity: 0;
+    transform: translateY(0); /* Estado inicial. A animação 'forwards' faz a transição */
+}
+
+/* Keyframes e Animações (Convertidos de volta para o CSS padrão) */
+
+@keyframes logoGlow {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.3)); }
+    50% { filter: drop-shadow(0 0 40px rgba(250, 204, 21, 0.6)); }
+}
+
+@keyframes finalGlow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.5)); }
+    50% { filter: drop-shadow(0 0 50px rgba(250, 204, 21, 0.7)); }
+}
+
+@keyframes cardSlideUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(30px); }
+}
+
+@keyframes barGrow {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+@keyframes insightAppear {
+    to { opacity: 1; transform: translateX(0); }
+    from { opacity: 0; transform: translateX(-30px); }
+}
+
+@keyframes postPop {
+    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes summaryFade {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+}
+
+@keyframes sloganFade {
+    to { opacity: 1; }
+}
+
+@keyframes btnFade {
+    to { opacity: 1; }
+}
+
+/* Classes de Animação Customizadas para Reutilização no JSX */
+.animate-logo-glow {
+    animation: logoGlow 2s ease-in-out;
+}
+
+.animate-final-glow {
+    animation: finalGlow 2s ease-in-out infinite;
+}
+
+.animate-bar-grow {
+    animation: barGrow 1.5s ease forwards;
+    transform-origin: bottom;
+}
+
+.animate-slogan-fade {
+    animation: sloganFade 1.5s ease forwards 0.5s;
+}
+
+.animate-btn-fade {
+    animation: btnFade 1s ease forwards 1.5s;
+}
+
+/* Aplicação dos Keyframes nos Componentes */
+/* Usamos classes utility do Tailwind (delay-X) para variar os inícios */
+.card-animated { animation: cardSlideUp 0.8s ease forwards; }
+.insight-card-animated { animation: insightAppear 0.8s ease forwards; }
+.post-card-animated { animation: postPop 0.6s ease forwards; }
+.summary-item-animated { animation: summaryFade 0.8s ease forwards; }

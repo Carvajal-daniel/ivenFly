@@ -35,7 +35,7 @@ export const DesktopNavigation = () => {
           key={item.name}
           href={item.href}
           onClick={(e) => handleScroll(e, item.href)}
-          className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+          className="text-black/70 hover:text-foreground transition-colors font-medium"
           custom={index}
           initial="hidden"
           animate="visible"

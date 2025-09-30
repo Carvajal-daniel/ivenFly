@@ -206,7 +206,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
 
       {/* Nome */}
       <div className="space-y-2">
-        <Label htmlFor="name" className="text-sm font-medium">Nome completo *</Label>
+        
         <Input
           id="name"
           name="name"
@@ -223,7 +223,6 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
 
       {/* Email */}
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
         <Input
           id="email"
           name="email"
@@ -240,7 +239,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
 
       {/* CPF */}
       <div className="space-y-2">
-        <Label htmlFor="cpf" className="text-sm font-medium">CPF *</Label>
+      
         <Input
           id="cpf"
           name="cpf"
@@ -258,7 +257,6 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
 
       {/* Telefone */}
       <div className="space-y-2">
-        <Label htmlFor="phone" className="text-sm font-medium">Telefone *</Label>
         <Input
           id="phone"
           name="phone"
@@ -275,8 +273,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
       </div>
 
       {/* Senha */}
-      <div className="space-y-2 relative">
-        <Label htmlFor="password" className="text-sm font-medium">Senha *</Label>
+      <div className="space-y-2 relative flex items-center justify-center">
         <Input
           id="password"
           name="password"
@@ -292,7 +289,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
           type="button"
           onClick={() => setShowPassword(s => !s)}
           aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
-          className="absolute right-3 top-[34px] text-muted-foreground hover:text-foreground transition-colors"
+          className="absolute right-3 text-muted-foreground hover:text-foreground transition-colors"
           disabled={isLoading}
         >
           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -301,8 +298,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
       </div>
 
       {/* Confirmar Senha */}
-      <div className="space-y-2 relative">
-        <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirmar senha *</Label>
+      <div className="space-y-2 relative flex items-center justify-center">
         <Input
           id="confirmPassword"
           name="confirmPassword"
@@ -318,7 +314,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
           type="button"
           onClick={() => setShowConfirmPassword(s => !s)}
           aria-label={showConfirmPassword ? "Esconder senha" : "Mostrar senha"}
-          className="absolute right-3 top-[34px] text-muted-foreground hover:text-foreground transition-colors"
+          className="absolute right-3 flex text-muted-foreground hover:text-foreground transition-colors"
           disabled={isLoading}
         >
           {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -327,7 +323,7 @@ export const RegisterForm = ({ onSwitchToLogin }: RegisterFormProps) => {
       </div>
 
       {/* Termos */}
-      <div className="space-y-2">
+      <div className="space-y-2 ">
         <div className="flex items-start gap-3">
           <Checkbox
             id="terms"

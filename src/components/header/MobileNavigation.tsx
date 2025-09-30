@@ -36,7 +36,7 @@ export const MobileNavigation: React.FC<MobileProps> = ({
               key={item.name}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="text-muted-foreground hover:text-foreground text-4xl transition-colors font-medium"
+              className="text-muted-foreground hover:text-foreground text-3xl transition-colors font-medium"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.05 * index }}

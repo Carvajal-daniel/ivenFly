@@ -24,8 +24,6 @@ const Hero = () => {
             <HeroButtons />
             <HeroStats />
           </div>
-
-          {/* Lado direito */}
           <HeroImage />
         </div>
       </div>

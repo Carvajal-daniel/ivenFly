@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
+import UplysVideo from "./info";
 
 const heroImage = "/assets/hero-ai-business.jpg";
 
@@ -14,16 +15,9 @@ const HeroImage = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
     >
-      <div className="relative rounded-2xl overflow-hidden shadow-elegant">
-        <Image
-          src={heroImage}
-          alt="Visualização de Crescimento de Negócios com IA"
-          className="w-full h-auto object-cover"
-          height={500}
-          width={500}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
-      </div>
+   
+   <UplysVideo height="h-[600px]" />
+
 
       {/* Card Flutuante */}
       <motion.div

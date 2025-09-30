@@ -2,12 +2,13 @@
 
 import GradientBg from "@/lib/gradient";
 import { motion } from "framer-motion";
+import UplysVideo from "./info";
 
 const HeroDecorations = () => {
   return (
     <>
       {/* Polígono Colorido */}
-   <GradientBg className={`hidden md:block absolute  md:bottom-[10%] md:-left-[2%] md:w-[25rem] md:h-[25rem] bg-green-400/70 rounded-full blur-[5rem]`}
+   <GradientBg className={`hidden md:block absolute md:bottom-[10%] md:-left-[2%] md:w-[35rem] md:h-[35rem] bg-gradient-to-br from-blue-700 rounded-lg blur-[5rem]`}
       />  
 
       {/* Bolinhas Flutuantes */}

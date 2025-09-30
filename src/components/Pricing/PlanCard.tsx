@@ -32,9 +32,12 @@ export const PlanCard: React.FC<PlanCardProps> = ({
 }) => {
   return (
     <>
-      <GradientBg
-        className={`hidden md:block absolute  top-3 -right-[40rem]  w-[30rem] h-[30rem] bg-green-400/40  rounded-full blur-[5rem]`}
+        <GradientBg
+        className={`hidden md:block absolute top-60 -right-[60rem]  w-[30rem] h-[40rem] bg-gradient-to-br from-blue-100 to-primary  rounded-full blur-[9rem]`}
+        
       />
+
+      
       <Card
         className={`grid grid-rows-[auto,1fr,auto] h-full rounded-xl backdrop-blur-sm transition-all duration-300
         ${
