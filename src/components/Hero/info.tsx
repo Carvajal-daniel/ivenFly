@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const SCENE_TIMINGS = [3000, 5000, 5000, 4000, 4000, 6000];
 
@@ -33,7 +34,7 @@ const UplysVideo: React.FC<{ height?: string }> = ({ height = "h-[500px]" }) => 
             exit={{ opacity: 0 }}
           >
             <div className="text-6xl flex items-center justify-center md:text-6xl font-extrabold  text-black/70">
-            <img src="/assets/logo.png" className=" h-30 w-40 -mr-10" alt="" />
+            <Image src="/assets/logo.png" className=" h-30 w-40 -mr-10" alt="uplys logo" width={100} height={100} />
               Uplys
             </div>
           </motion.div>

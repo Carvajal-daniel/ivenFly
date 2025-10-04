@@ -2,7 +2,6 @@
 
 import GradientBg from "@/lib/gradient";
 import { motion } from "framer-motion";
-import UplysVideo from "./info";
 
 const HeroDecorations = () => {
   return (

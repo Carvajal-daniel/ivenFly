@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import UplysVideo from "./info";
 
-const heroImage = "/assets/hero-ai-business.jpg";
 
 const HeroImage = () => {
   return (

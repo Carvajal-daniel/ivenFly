@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl transition-colors ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-background/30 backdrop-blur-xl transition-colors ${
         scrolled ? "border-b border-border/50" : ""
       }`}
     >

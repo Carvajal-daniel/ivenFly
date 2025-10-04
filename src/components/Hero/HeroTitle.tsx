@@ -13,7 +13,7 @@ const HeroTitle = () => {
       <h1 className="text-5xl lg:text-7xl font-bold text-center md:text-left">
         <span className="text-black/80">Transforme dados em decisões</span>
         <br />
-        <span className="gradient-primary bg-clip-text text-transparent">
+        <span className=" bg-clip-text text-black/80">
           e leve sua empresa para o próximo nível
         </span>
       </h1>

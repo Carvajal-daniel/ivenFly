@@ -2,15 +2,23 @@ import Hero from "@/components/Hero/Hero"
 import Services from "@/components/services/Services"
 import Header from "@/components/header/Header"
 import { SubscriptionPlans } from "@/components/Pricing/SubscriptionPlans"
-import GradientBg from "@/lib/gradient"
+import Footer from "@/components/footer/Footer"
+
 
 export default function Home() {
   return (
-    <div className="min-h-screen ">
+    <>
+    <header>
       <Header />
+    </header>
+    <main className="min-h-screen ">
       <Hero />
       <Services />
       <SubscriptionPlans/>
-    </div>
+    </main>
+    <footer>
+      <Footer />
+    </footer>
+    </>
   )
 }

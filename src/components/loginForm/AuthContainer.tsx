@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { AuthLayout } from "./AuthLayout";
-import { LoginForm } from "./LoginForm";
-import { RegisterForm } from "./RegisterForm";
+import { LoginForm } from "./login/LoginForm";
+import { RegisterForm } from "./register/RegisterForm";
 
 export default function AuthContainer() {
   const [isLoginMode, setIsLoginMode] = useState(true);
