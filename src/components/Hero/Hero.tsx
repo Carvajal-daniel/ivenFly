@@ -18,7 +18,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 py-32 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Lado esquerdo */}
-          <div className="space-y-8">
+          <div className="space-y-8 flex flex-col md:block items-center">
             <HeroBadge />
             <HeroTitle />
             <HeroButtons />

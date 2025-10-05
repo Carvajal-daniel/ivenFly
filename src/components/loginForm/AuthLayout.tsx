@@ -19,7 +19,7 @@ export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
         <div className="bg-card shadow-elegant rounded-2xl p-8 backdrop-blur-sm border border-border/50">
           <div className="text-center mb-8">
             <div className=" mx-auto mb-4 flex items-center justify-center ">
-            <Image src="/assets/logo.png" className=" h-20 md:h-25 w-30 md:w-42 -mb-5"  alt="Logo" width={100} height={100} />
+            <Image src="/assets/logo.png" className=" h-18 w-22 md:h-28 md:w-30 -mb-5"  alt="Logo" width={100} height={100} />
             </div>
             <h1 className="text-2xl font-semibold text-foreground mb-1">{title}</h1>
             <p className="text-muted-foreground">{subtitle}</p>

@@ -17,7 +17,7 @@ const HeroStats = () => {
       transition={{ duration: 0.5, delay: 0.7 }}
     >
       {stats.map((stat) => (
-        <div key={stat.label} className="text-center">
+        <div key={stat.label} className="flex flex-col max-w-md items-center ">
           <div className="text-3xl font-bold gradient-primary bg-clip-text text-transparent">
             {stat.value}
           </div>

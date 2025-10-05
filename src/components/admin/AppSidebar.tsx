@@ -45,7 +45,7 @@ export function AppSidebar() {
     >
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2 py-6 mb-2">
+          <SidebarGroupLabel className="px-2 py-6  mb-4">
             {!isCollapsed ? (
               <div className="flex items-center gap-2">
                 <Image 
@@ -55,7 +55,7 @@ export function AppSidebar() {
                   width={100} 
                   height={100} 
                 />
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 -ml-7 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-2xl -ml-5 text-white dark:text-white">
                   Uplys
                 </span>
               </div>
@@ -98,11 +98,11 @@ export function AppSidebar() {
                         )}
                         <item.icon 
                           className={`
-                            h-5 w-5 transition-transform duration-200
+                            h-5 w-5 text-white transition-transform duration-200
                             ${isActive ? "scale-110" : "group-hover:scale-105"}
                           `}
                         />
-                        <span className="font-medium">{item.title}</span>
+                        <span className="font-medium text-white">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

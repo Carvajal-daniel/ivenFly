@@ -18,9 +18,13 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <AppSidebar />
         <div className="flex-1 flex flex-col">
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
-            <SidebarTrigger className="-ml-2" />
+            <SidebarTrigger className="-ml-3 hover:teext-foreground cursor-pointer  " />
             <div className="flex-1 flex justify-between items-center">
+               <div className="flex flex-col items-start">
               <h2 className="text-lg font-semibold">Dashboard</h2>
+              <p className="text-sm text-muted-foreground">Bem-vindo de volta</p>
+
+              </div>
 
               {/* Área do usuário */}
               {loading ? (
