@@ -26,18 +26,15 @@ export const createUser = async (user: {
 };
 
 
-// login
 export const loginUser = async (user: { email: string; password: string }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user),
+    credentials: "include", 
   });
 
-  let data: ApiResponse = {};
-  try {
-    data = await response.json();
-  } catch {}
-
+  const data = await response.json();
   return { ok: response.ok, data };
 };
+

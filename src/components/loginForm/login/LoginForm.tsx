@@ -22,6 +22,28 @@ export const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorEmail, setErrorEmail] = useState<string | null>(null);
   const [errorPassword, setErrorPassword] = useState<string | null>(null);
+ 
+
+     useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.ok) {
+          router.push("/dashboard");
+        } else {
+      
+        }
+      } catch (error) {
+        router.push("/auth");
+      }
+    };
+    checkAuth();
+  }, [router]);
+
 
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberEmail");

@@ -6,6 +6,14 @@
 :root {
   --font-inter: "Inter", sans-serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
 body {
@@ -17,7 +25,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: -0.02em; /* mais moderno */
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -128,50 +135,49 @@ h1, h2, h3, h4, h5, h6 {
   --sidebar-ring: oklch(0.541 0.281 293.009);
 }
 
-
 @layer base {
   :root {
     /* Base colors - clean, light, professional */
     --background: 0 0% 99%;
     --foreground: 217 19% 12%;
-    
+
     --card: 0 0% 100%;
     --card-foreground: 217 19% 12%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 217 19% 12%;
-    
+
     /* Brand colors - technological blues with vibrant accents */
     --primary: 226 75% 55%;
     --primary-foreground: 0 0% 100%;
-    
+
     --secondary: 217 12% 96%;
     --secondary-foreground: 217 19% 12%;
-    
+
     --muted: 217 12% 96%;
     --muted-foreground: 217 13% 45%;
-    
+
     --accent: 270 100% 85%;
     --accent-foreground: 217 19% 12%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --border: 217 12% 90%;
     --input: 217 12% 94%;
     --ring: 226 75% 55%;
-    
+
     /* 1Uply brand gradients and effects */
     --gradient-primary: linear-gradient(135deg, hsla(226, 60%, 39%, 1.00), hsla(336, 77%, 57%, 1.00));
     --gradient-accent: linear-gradient(135deg, hsl(270 75% 65%), hsl(315 75% 65%), hsl(0 75% 65%));
     --gradient-polygon: linear-gradient(45deg, hsla(151, 100%, 70%, 1.00), hsla(193, 75%, 38%, 1.00), hsl(315 100% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(217 12% 99%), hsl(226 25% 96%));
-    
+
     /* Shadows and effects */
     --shadow-elegant: 0 10px 40px -10px hsl(226 75% 55% / 0.1);
     --shadow-card: 0 4px 20px -4px hsl(226 75% 55% / 0.08);
     --shadow-glow: 0 0 40px hsl(226 75% 55% / 0.2);
-    
+
     /* Typography */
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -244,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
@@ -255,31 +261,31 @@ h1, h2, h3, h4, h5, h6 {
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-accent {
     background: var(--gradient-accent);
   }
-  
+
   .gradient-polygon {
     background: var(--gradient-polygon);
   }
-  
+
   .gradient-hero {
     background: var(--gradient-hero);
   }
-  
+
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
   }
-  
+
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
-  
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
-  
+
   .polygon-shape {
     clip-path: polygon(0 0, 80% 0, 100% 40%, 60% 100%, 0 85%);
   }
@@ -289,7 +295,7 @@ h1, h2, h3, h4, h5, h6 {
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
   .animate-glow {
     animation: glow 4s ease-in-out infinite;
   }
@@ -305,10 +311,6 @@ h1, h2, h3, h4, h5, h6 {
   0%, 100% { opacity: 0.8; }
   50% { opacity: 1; }
 }
-
-
-
-
 
 /* Estilos de Cores Customizadas para o Logo e Métricas */
 .uplys-logo {
@@ -415,3 +417,12 @@ h1, h2, h3, h4, h5, h6 {
 .insight-card-animated { animation: insightAppear 0.8s ease forwards; }
 .post-card-animated { animation: postPop 0.6s ease forwards; }
 .summary-item-animated { animation: summaryFade 0.8s ease forwards; }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
