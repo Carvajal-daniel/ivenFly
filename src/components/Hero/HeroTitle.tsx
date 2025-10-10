@@ -10,10 +10,10 @@ const HeroTitle = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
     >
-      <h1 className="text-5xl lg:text-7xl font-bold text-center md:text-left">
-        <span className="text-black/80">Transforme dados em decisões</span>
+      <h1 className="w-full text-4xl lg:text-7xl font-bold text-center md:text-left">
+        <span className="text-black/80 dark:text-gray-200">Transforme dados em decisões</span>
         <br />
-        <span className=" bg-clip-text text-black/80">
+        <span className=" text-black/80 dark:text-gray-200">
           e leve sua empresa para o próximo nível
         </span>
       </h1>

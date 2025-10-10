@@ -20,10 +20,10 @@ export const PlansHeader = () => (
     </div>
 
     <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-snug">
-     <span className="gradient-primary bg-clip-text text-transparent">  Transforme Dados em Crescimento</span>
+     <span className="text-black/80 dark:text-white">  Transforme Dados em Crescimento</span>
     </h1>
 
-    <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+    <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed dark:text-gray-100">
       Nossa IA analisa seus dados de negócio e gera insights precisos para acelerar seu crescimento
     </p>
   </motion.div>

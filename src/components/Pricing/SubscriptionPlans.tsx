@@ -48,13 +48,19 @@ const itemVariants: Variants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }, // Bezier curve
+    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
   },
 };
 
 export const SubscriptionPlans = () => (
-  <section className="relative py-16 px-4 overflow-hidden">
-    <div className="absolute inset-0 gradient-hero opacity-30" />
+  <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-black dark:via-black dark:to-black">
+    {/* Gradient overlay */}
+    <div className="absolute inset-0 gradient-hero opacity-30 dark:opacity-5" />
+    
+    {/* Glow effects */}
+    <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/10 dark:bg-blue-500/20 blur-[120px] rounded-full pointer-events-none" />
+    <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-500/10 dark:bg-purple-500/20 blur-[100px] rounded-full pointer-events-none" />
+
     <div className="container mx-auto max-w-6xl relative z-10">
       <PlansHeader />
 
@@ -89,5 +95,8 @@ export const SubscriptionPlans = () => (
 
       <GuaranteesAndDemo />
     </div>
+
+    {/* Bottom accent line */}
+    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent" />
   </section>
 );

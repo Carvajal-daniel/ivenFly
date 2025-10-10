@@ -14,7 +14,7 @@ const HeroButtons = () => {
     >
       <Button
         size="lg"
-        className="gradient-primary border-0 shadow-elegant hover:shadow-glow transition-all duration-300 group"
+        className="bg-primary border-0 shadow-elegant hover:shadow-glow transition-all duration-300 text-white"
       >
         Gerar meu Relatório Agora
         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

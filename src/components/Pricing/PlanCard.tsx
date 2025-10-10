@@ -32,26 +32,24 @@ export const PlanCard: React.FC<PlanCardProps> = ({
 }) => {
   return (
     <>
-        <GradientBg
-        className={`hidden md:block absolute top-60 -right-[60rem]  w-[30rem] h-[40rem] bg-gradient-to-br from-blue-100 to-primary  rounded-full blur-[9rem]`}
-        
+      <GradientBg
+        className={`hidden md:block absolute top-60 -right-[60rem] w-[30rem] h-[40rem] bg-gradient-to-br from-blue-100 to-primary dark:from-blue-950/30 dark:to-primary/30 rounded-full blur-[9rem]`}
       />
 
-      
       <Card
         className={`grid grid-rows-[auto,1fr,auto] h-full rounded-xl backdrop-blur-sm transition-all duration-300
         ${
           highlight
-            ? "shadow-lg border-primary/10 border bg-gradient-to-br from-card via-card to-primary/10"
-            : "shadow-md border border-border/50 bg-card"
+            ? "shadow-lg border-2 border-primary/20 dark:border-primary/40 bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-950/20"
+            : "shadow-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80"
         }`}
       >
         {/* Cabeçalho */}
         <CardHeader className="text-center pb-3 pt-2">
-          <CardTitle className="text-2xl md:text-3xl font-semibold">
+          <CardTitle className="text-2xl md:text-3xl font-bold text-primary dark:text-blue-500">
             {title}
           </CardTitle>
-          <CardDescription className="text-sm text-muted-foreground">
+          <CardDescription className="text-sm text-gray-600 dark:text-gray-400">
             {description}
           </CardDescription>
 
@@ -60,13 +58,13 @@ export const PlanCard: React.FC<PlanCardProps> = ({
               className={`text-3xl md:text-4xl font-extrabold tracking-tight
               ${
                 highlight
-                  ? "bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-                  : "text-primary"
+                  ? "text-gray-900 dark:text-white"
+                  : "text-gray-900 dark:text-gray-100"
               }`}
             >
               {price}
             </span>
-            <span className="text-sm text-muted-foreground"> /mês</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400"> /mês</span>
           </div>
         </CardHeader>
 
@@ -78,7 +76,6 @@ export const PlanCard: React.FC<PlanCardProps> = ({
                 key={i}
                 icon={feature.icon}
                 text={feature.text}
-                gradient={highlight}
               />
             ))}
           </div>
@@ -90,8 +87,8 @@ export const PlanCard: React.FC<PlanCardProps> = ({
             className={`w-full h-11 text-sm font-semibold rounded-xl transition-all duration-300
             ${
               highlight
-                ? "gradient-primary text-primary-foreground shadow-md"
-                : "bg-blue-600 text-white"
+                ? "bg-primary hover:bg-primary/90 dark:bg-primary dark:hover:bg-primary/90 text-white shadow-md hover:shadow-lg"
+                : "bg-primary hover:bg-primary/90 cursor-pointer dark:bg-gray-800 dark:hover:bg-gray-700 text-white shadow-lg hover:shadow-xl"
             }`}
           >
             {buttonText}

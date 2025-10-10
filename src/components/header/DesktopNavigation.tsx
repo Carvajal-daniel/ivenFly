@@ -20,7 +20,10 @@ const navVariants = {
 };
 
 export const DesktopNavigation = () => {
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
@@ -35,7 +38,11 @@ export const DesktopNavigation = () => {
           key={item.name}
           href={item.href}
           onClick={(e) => handleScroll(e, item.href)}
-          className="text-black/70 hover:text-foreground transition-colors font-medium"
+          className="
+            text-black/90 dark:text-gray-200 
+            hover:text-blue-600 dark:hover:text-gray-400 
+            transition-colors font-medium
+          "
           custom={index}
           initial="hidden"
           animate="visible"

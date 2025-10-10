@@ -74,9 +74,9 @@ h1, h2, h3, h4, h5, h6 {
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.606 0.25 292.717);
-  --primary-foreground: oklch(0.969 0.016 293.756);
-  --secondary: oklch(0.967 0.001 286.375);
+  --primary: #47cebf;
+  --primary-foreground: #fff;
+  --secondary: #0000;
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
@@ -107,8 +107,9 @@ h1, h2, h3, h4, h5, h6 {
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.21 0.006 285.885);
+  --darks: #fcfcfc
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.541 0.281 293.009);
+  --primary: #47cebf;
   --primary-foreground: oklch(0.969 0.016 293.756);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
@@ -148,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
     --popover-foreground: 217 19% 12%;
 
     /* Brand colors - technological blues with vibrant accents */
-    --primary: 226 75% 55%;
+    --primary: black;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217 12% 96%;
@@ -168,7 +169,8 @@ h1, h2, h3, h4, h5, h6 {
     --ring: 226 75% 55%;
 
     /* 1Uply brand gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsla(226, 60%, 39%, 1.00), hsla(336, 77%, 57%, 1.00));
+ --gradient-primary: linear-gradient(135deg, #3b82f6, #9333ea);
+
     --gradient-accent: linear-gradient(135deg, hsl(270 75% 65%), hsl(315 75% 65%), hsl(0 75% 65%));
     --gradient-polygon: linear-gradient(45deg, hsla(151, 100%, 70%, 1.00), hsla(193, 75%, 38%, 1.00), hsl(315 100% 70%));
     --gradient-hero: linear-gradient(135deg, hsl(217 12% 99%), hsl(226 25% 96%));
@@ -207,6 +209,7 @@ h1, h2, h3, h4, h5, h6 {
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
+--darks: #fcfcfc
 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;

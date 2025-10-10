@@ -7,3 +7,4 @@ export const validatePhone = (phone: string) => {
 
 export const validateEmail = (email: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+

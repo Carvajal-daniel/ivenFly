@@ -8,7 +8,7 @@ import { DesktopButtons } from "./DesktopButtons";
 import { MobileNavigation } from "./MobileNavigation";
 import Link from "next/link";
 import Image from "next/image";
-import logoSymbol from "../../../public/assets/uplyslogo.png"; 
+import logoSymbol from "../../../public/assets/logo2.png"; 
 
 const Logo = () => (
   <motion.div
@@ -16,16 +16,16 @@ const Logo = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3 }}
   >
-    <Link href="/" className="flex items-center gap-2">
+    <Link href="/" className="flex items-center gap-2 -ml-2 md:-ml-4">
       <Image
         src={logoSymbol}
         alt="Uplys logo"
-        width={500}
-        height={500}
-        className="w-20 h-14 -mr-5 mb-1 md:w-20 object-fit"
+        width={1000}
+        height={1000}
+        className="w-18 h-16 -mr-7 mb-1 md:w-22 md:h-20 object-fit"
         priority
       />
-      <span className="text-xl md:text-2xl font-semibold tracking-tight text-black/80 dark:text-white">
+      <span className="text-xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
         Uplys
       </span>
     </Link>
@@ -47,9 +47,11 @@ const Header = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/30 backdrop-blur-xl transition-colors ${
-        scrolled ? "border-b border-border/50 shadow-sm" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-gray-900/90 border-gray-200 dark:border-gray-800 shadow-lg"
+          : "bg-white/30 dark:bg-gray-950/30 border-gray-200/50 dark:border-gray-800/50 shadow-md"
+      } border-b backdrop-blur-xl`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Logo />
@@ -62,7 +64,7 @@ const Header = () => {
 
         {/* Mobile Button */}
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
         >
@@ -71,9 +73,10 @@ const Header = () => {
             initial={{ rotate: -90, opacity: 0 }}
             animate={{ rotate: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="text-black/80 dark:text-white/80"
+            className="flex items-center gap-3 text-gray-800 dark:text-gray-200"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
+
           </motion.div>
         </button>
       </div>

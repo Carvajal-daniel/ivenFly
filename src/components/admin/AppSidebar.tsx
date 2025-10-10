@@ -49,7 +49,7 @@ export function AppSidebar() {
             {!isCollapsed ? (
               <div className="flex items-center gap-2">
                 <Image 
-                  src="/assets/logo.png" 
+                  src="/assets/logo2.png" 
                   className="h-20 w-20 -ml-3 object-contain"  
                   alt="Logo" 
                   width={100} 

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ThemeToggle } from "../ThemeToggle";
 
 const navItems = [
   { name: "Services", href: "#services" },
@@ -68,13 +69,14 @@ export const MobileNavigation: React.FC<MobileProps> = ({
             >
               <Link href="/auth">
                 <Button
-                  className="gradient-primary hover:cursor-pointer border-0 shadow-elegant py-5 px-20"
+                  className="bg-primary hover:cursor-pointer border-0 shadow-elegant py-5 px-20"
                   onClick={() => setIsOpen(false)}
                 >
                   Get Started
                 </Button>
               </Link>
             </motion.div>
+            <ThemeToggle />
           </div>
         </div>
       </motion.div>

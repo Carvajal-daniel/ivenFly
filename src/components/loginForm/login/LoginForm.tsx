@@ -1,131 +1,66 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Mail, Lock } from "lucide-react";
+import { useLoginForm } from "./LoginForm.hooks";
 import { InputField } from "./InputField";
 import { PasswordField } from "./PasswordField";
 import { RememberMe } from "./RememberMe";
 import { SocialLogin } from "./SocialLogin";
-import { Separator } from "@/components/ui/separator";
-import { Mail, Lock } from "lucide-react";
-import { loginUser } from "@/lib/api";
+import { LoginFormProps } from "./LoginForm.types";
 
-interface LoginFormProps {
-  onSwitchToRegister: () => void;
-}
-
-export const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorEmail, setErrorEmail] = useState<string | null>(null);
-  const [errorPassword, setErrorPassword] = useState<string | null>(null);
- 
-
-     useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (res.ok) {
-          router.push("/dashboard");
-        } else {
-      
-        }
-      } catch (error) {
-        router.push("/auth");
-      }
-    };
-    checkAuth();
-  }, [router]);
-
-
-  useEffect(() => {
-    const savedEmail = localStorage.getItem("rememberEmail");
-    if (savedEmail) {
-      setEmail(savedEmail);
-      setRememberMe(true);
-    }
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorEmail(null);
-    setErrorPassword(null);
-
-    if (!email.trim()) return setErrorEmail("Email é obrigatório");
-    if (!password) return setErrorPassword("Senha é obrigatória");
-
-    setIsLoading(true);
-    try {
-      const { ok, data } = await loginUser({ email, password });
-      if (!ok) {
-        const msg = data.message || "Credenciais inválidas";
-        if (msg.toLowerCase().includes("email")) setErrorEmail(msg);
-        else setErrorPassword(msg);
-        return;
-      }
-      if (rememberMe) localStorage.setItem("rememberEmail", email);
-      else localStorage.removeItem("rememberEmail");
-
-      router.push("/dashboard");
-    } catch (error) {
-      setErrorEmail("Erro ao fazer login");
-      
-    } finally {
-      setIsLoading(false);
-    }
-  };
+export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
+  const { values, setValues, errors, loading, handleSubmit } = useLoginForm();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 ">
       <InputField
         id="email"
-        value={email}
-        onChange={setEmail}
+        value={values.email}
+        onChange={(v) => setValues({ ...values, email: v })}
         placeholder="seu@email.com"
         icon={<Mail size={18} />}
-        error={errorEmail}
-        disabled={isLoading}
+        error={errors.email || null}
+        disabled={loading}
         autoComplete="email"
       />
+
       <PasswordField
         id="password"
-        value={password}
-        onChange={setPassword}
-        error={errorPassword}
+        value={values.password}
+        onChange={(v) => setValues({ ...values, password: v })}
+        error={errors.password || null}
         placeholder="••••••••"
-        icon={<Lock size={18}/>}
-        disabled={isLoading}
+        icon={<Lock size={18} />}
+        disabled={loading}
       />
+
       <div className="flex items-center justify-between">
         <RememberMe
-          checked={rememberMe}
-          onChange={setRememberMe}
-          disabled={isLoading}
+          checked={values.rememberMe}
+          onChange={(v) => setValues({ ...values, rememberMe: v })}
+          disabled={loading}
         />
         <button
           type="button"
           className="text-sm text-primary hover:underline font-medium"
-          disabled={isLoading}
+          disabled={loading}
         >
           Esqueci minha senha
         </button>
       </div>
+
       <Button
         type="submit"
         variant="primary"
         size="lg"
         className="w-full"
-        disabled={isLoading}
+        disabled={loading}
       >
-        {isLoading ? "Entrando..." : "Entrar"}
+        {loading ? "Entrando..." : "Entrar"}
       </Button>
+
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <Separator className="w-full" />
@@ -136,18 +71,20 @@ export const LoginForm = ({ onSwitchToRegister }: LoginFormProps) => {
           </span>
         </div>
       </div>
+
       <SocialLogin />
+
       <div className="text-center text-sm">
         <span className="text-muted-foreground">Não tem uma conta? </span>
         <button
           type="button"
           onClick={onSwitchToRegister}
           className="text-primary hover:underline font-medium"
-          disabled={isLoading}
+          disabled={loading}
         >
           Cadastre-se
         </button>
       </div>
     </form>
   );
-};
+}
