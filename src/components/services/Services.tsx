@@ -177,7 +177,7 @@ const Services: React.FC = () => {
                     <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative z-10">
-                    <p className="text-sm md:text-[17px] text-gray-600 dark:text-gray-400 -mt-4 leading-relaxed">
+                    <p className="text-sm md:text-[15px] text-gray-600 dark:text-gray-400 -mt-4 leading-relaxed">
                       {service.description}
                     </p>
                   </CardContent>
