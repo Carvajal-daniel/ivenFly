@@ -127,7 +127,7 @@ const Services: React.FC = () => {
                 onHoverEnd={() => setHoveredCard(null)}
               >
                 <Card 
-                  className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 dark:hover:shadow-primary/40 hover:-translate-y-3 border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/60 bg-white dark:bg-gray-900/80 backdrop-blur-sm"
+                  className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 dark:hover:shadow-primary/40 hover:-translate-y-3 border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/60 bg-white dark:bg-gray-900/80 backdrop-blur-sm text-center "
                 >
                   
                   {/* Halo de Cor Sutil */}
@@ -142,7 +142,7 @@ const Services: React.FC = () => {
                   
                   <CardHeader className="pb-4 relative z-10">
                     <motion.div 
-                      className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 dark:from-primary/20 dark:to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      className="w-12 h-12 ml-[42%] rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 dark:from-primary/20 dark:to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                       animate={{
                         scale: isHovered ? 1.1 : 1,
                       }}
@@ -174,10 +174,10 @@ const Services: React.FC = () => {
                         </>
                       )}
                     </motion.div>
-                    <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">{service.title}</CardTitle>
+                    <CardTitle className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">{service.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="relative z-10">
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-sm md:text-[17px] text-gray-600 dark:text-gray-400 -mt-4 leading-relaxed">
                       {service.description}
                     </p>
                   </CardContent>

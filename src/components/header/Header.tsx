@@ -20,12 +20,12 @@ const Logo = () => (
       <Image
         src={logoSymbol}
         alt="Uplys logo"
-        width={1000}
-        height={1000}
-        className="w-18 h-16 -mr-6 md:-mr-7 mb-1 md:w-22 md:h-20 object-fit"
+        width={0}
+        height={0}
+        className="w-18 h-16 -mr-6 mb-1 md:w-20 md:h-18 object-contain"
         priority
       />
-      <span className="text-2xl md:text-3xl font-medium md:font-semibold tracking-tight text-gray-900 dark:text-white">
+      <span className="text-2xl md:text-[1.5rem] font-medium md:font-semibold tracking-tight text-gray-900 dark:text-white hover:text-black/80 dark:hover:text-white/80">
         Uplys
       </span>
     </Link>
