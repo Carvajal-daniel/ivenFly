@@ -22,10 +22,10 @@ const Logo = () => (
         alt="Uplys logo"
         width={1000}
         height={1000}
-        className="w-18 h-16 -mr-7 mb-1 md:w-22 md:h-20 object-fit"
+        className="w-18 h-16 -mr-6 md:-mr-7 mb-1 md:w-22 md:h-20 object-fit"
         priority
       />
-      <span className="text-xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <span className="text-2xl md:text-3xl font-medium md:font-semibold tracking-tight text-gray-900 dark:text-white">
         Uplys
       </span>
     </Link>

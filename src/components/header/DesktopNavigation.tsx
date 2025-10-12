@@ -39,7 +39,7 @@ export const DesktopNavigation = () => {
           href={item.href}
           onClick={(e) => handleScroll(e, item.href)}
           className="
-            text-black/90 dark:text-gray-200 
+            text-black/80 text-[.9rem] dark:text-gray-200 
             hover:text-blue-600 dark:hover:text-gray-400 
             transition-colors font-medium
           "
