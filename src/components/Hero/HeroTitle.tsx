@@ -10,14 +10,14 @@ const HeroTitle = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.5 }}
     >
-      <h1 className="w-full text-4xl lg:text-7xl font-bold text-center md:text-left">
+      <h1 className="w-full text-4xl lg:text-6xl font-bold text-center md:text-left">
         <span className="text-black/80 dark:text-gray-200">Transforme dados em decisões</span>
         <br />
         <span className=" text-black/80 dark:text-gray-200">
           e leve sua empresa para o próximo nível
         </span>
       </h1>
-      <p className="text-md md:text-lg text-center md:text-left text-muted-foreground max-w-2xl">
+      <p className="text-md md:text-md text-center md:text-left text-muted-foreground max-w-2xl">
         O Uplys é seu parceiro inteligente: compara seu negócio com o mercado, 
         organiza suas finanças e sugere estratégias que realmente funcionam. 
         Mais crescimento, menos adivinhação.
