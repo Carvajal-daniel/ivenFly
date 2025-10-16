@@ -67,15 +67,18 @@ export function useRegisterForm(onSuccess: () => void) {
       };
       const { ok, data } = await createUser(payload);
 
-      if (!ok) {
-        const msg = (data?.error || data?.message || "").toLowerCase();
-        if (msg.includes("email")) setErrors({ email: "Email já cadastrado" });
-        else if (msg.includes("cpf")) setErrors({ cpf: "CPF já cadastrado" });
-        else if (msg.includes("phone"))
-          setErrors({ phone: "Telefone já cadastrado" });
-        else setErrors({ general: "Erro ao criar usuário" });
-        return;
-      }
+if (!ok) {
+  const msg = (data?.error || data?.message || "").toLowerCase();
+
+  if (msg === "invalid_cpf") setErrors({ cpf: "CPF inválido" });
+  else if (msg.includes("cpf")) setErrors({ cpf: "CPF já cadastrado" });
+  else if (msg.includes("email")) setErrors({ email: "Email já cadastrado" });
+  else if (msg.includes("phone")) setErrors({ phone: "Telefone já cadastrado" });
+  else setErrors({ general: "Erro ao criar usuário" });
+  return;
+}
+
+
 
       setIsSuccess(true);
       setTimeout(() => {

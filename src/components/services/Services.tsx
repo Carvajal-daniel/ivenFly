@@ -87,7 +87,7 @@ const Services: React.FC = () => {
             <span className="text-sm font-medium text-primary dark:text-blue-400">Nossos Serviços</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl w-ful mx-auto lg:text-5xl font-semibold mb-6">
+          <h2 className="text-4xl md:text-5xl w-ful mx-auto font-semibold mb-6">
             <span className="text-gray-900 dark:text-white">Soluções</span>
             <br />
             <motion.span 
@@ -127,7 +127,7 @@ const Services: React.FC = () => {
                 onHoverEnd={() => setHoveredCard(null)}
               >
                 <Card 
-                  className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 dark:hover:shadow-primary/40 hover:-translate-y-3 border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/60 bg-white dark:bg-gray-900/80 backdrop-blur-sm text-center "
+                  className="group relative transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 dark:hover:shadow-primary/40 hover:scale-101 border border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/60 bg-white dark:bg-gray-900/80 backdrop-blur-sm text-center "
                 >
                   
                   {/* Halo de Cor Sutil */}

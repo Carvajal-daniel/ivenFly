@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 
 const navItems = [
-  { name: "Services", href: "#services" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Solutions", href: "#solutions" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Serviços", href: "#services" },
+  { name: "Preços", href: "#pricing" },
+  { name: "Soluções", href: "#solutions" },
+  { name: "Sobre nos", href: "#about" },
+  { name: "Contato", href: "#contact" },
 ];
 
 const navVariants = {
@@ -26,9 +26,17 @@ export const DesktopNavigation = () => {
   ) => {
     e.preventDefault();
     const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (!target) return;
+
+    // 🧭 Ajuste aqui conforme a altura real do seu header fixo
+    const headerOffset = 90; // Exemplo: 90px
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = window.scrollY + elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -40,7 +48,7 @@ export const DesktopNavigation = () => {
           onClick={(e) => handleScroll(e, item.href)}
           className="
             text-black/80 text-[.9rem] dark:text-gray-200 
-            hover:text-blue-600 dark:hover:text-gray-400 
+            hover:text-primary dark:hover:text-gray-400 
             transition-colors font-medium
           "
           custom={index}

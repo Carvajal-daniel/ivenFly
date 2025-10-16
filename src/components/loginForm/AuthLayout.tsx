@@ -29,10 +29,10 @@ export const AuthLayout = ({ children, title, subtitle }: AuthLayoutProps) => {
               <div className="absolute inset-0 bg-primary/20 dark:bg-primary/30 blur-2xl rounded-full" />
               <Image 
                 src="/assets/logo2.png" 
-                className="h-18 w-20 md:h-28 md:w-30 -mb-5 relative z-10 drop-shadow-lg" 
+                className="h-18 w-20 md:h-28 md:w-30 -mb-5 relative z-10 drop-shadow-lg " 
                 alt="Logo" 
-                width={100} 
-                height={100} 
+                width={1000} 
+                height={1000} 
               />
             </div>
             

@@ -1,4 +1,5 @@
-import { MetricCard } from "@/components/admin/MetricCard";
+
+import MetricCard from "@/components/admin/MetricCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, TrendingUp, DollarSign, Activity } from "lucide-react";
 

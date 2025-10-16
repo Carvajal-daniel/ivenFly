@@ -53,7 +53,7 @@ const itemVariants: Variants = {
 };
 
 export const SubscriptionPlans = () => (
-  <section className="relative py-16 px-4 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-black dark:via-black dark:to-black">
+  <section className="relative py-24 px-4 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-black dark:via-black dark:to-black">
     {/* Gradient overlay */}
     <div className="absolute inset-0 gradient-hero opacity-30 dark:opacity-5" />
     

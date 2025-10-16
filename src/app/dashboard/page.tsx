@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DashboardLayout } from "@/components/admin/DashboardLayout";
 import Dashboard from "./Dashboard";
+import DashboardLayout from "@/components/admin/DashboardLayout";
 
 const Index = () => {
   const router = useRouter();

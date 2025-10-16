@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Facebook, Twitter, Linkedin, Instagram, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,20 +43,28 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-center md:text-left">
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="relative  bg-white dark:bg-gray-950 text-center md:text-left"
+    >
       {/* Gradiente sutil */}
       <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-50/50 dark:via-gray-900/50 to-gray-100/20 dark:to-gray-800/20 pointer-events-none" />
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Conteúdo principal: Marca, Newsletter e Links */}
+        {/* Conteúdo principal */}
         <div className="pt-5 pb-8 sm:pt-16 sm:pb-10 lg:pt-20 lg:pb-12">
-          
           <div className="grid grid-cols-1 gap-12 md:grid-cols-5 lg:grid-cols-12">
-
-            <div className="md:col-span-2 lg:col-span-4">
-              
-              {/* Logo e Nome da Marca */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 lg:col-span-4"
+            >
+              {/* Logo e Marca */}
               <Link href="/" className="inline-flex items-center -translate-x-7 gap-2 mb-4 hover:opacity-80 transition-opacity">
                 <div className="relative h-20 w-20 -mr-6 shrink-0">
                   <Image 
@@ -63,7 +74,9 @@ const Footer = () => {
                     objectFit="contain" 
                   />
                 </div>
-                <span className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tighter">Uplys</span>
+                <span className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tighter">
+                  Uplys
+                </span>
               </Link>
 
               <p className="text-sm w-full text-gray-600 dark:text-gray-400 mb-6 md:max-w-sm">
@@ -91,12 +104,17 @@ const Footer = () => {
                   Sem spam. Apenas o melhor conteúdo sobre análise de dados.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Seções de Links */}
-            <div className="md:col-span-3 lg:col-span-8 md:mt-20">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="md:col-span-3 lg:col-span-8 md:mt-20"
+            >
               <div className="grid grid-cols-3 gap-x-8 gap-y-10 sm:grid-cols-4">
-                
                 {Object.entries(linksRodape).map(([key, links]) => (
                   <div key={key}>
                     <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-gray-900 dark:text-white">
@@ -116,38 +134,47 @@ const Footer = () => {
                     </ul>
                   </div>
                 ))}
-                
               </div>
-            </div>
-
+            </motion.div>
           </div>
         </div>
 
-        {/* Rodapé inferior: Copyright e Redes Sociais */}
-        <div className="border-t border-gray-200 dark:border-gray-800 pt-6 pb-8">
+        {/* Rodapé inferior */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className=" pt-6 pb-8"
+        >
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            
             <p className="text-sm text-gray-600 dark:text-gray-400 order-2 sm:order-1">
               © {currentYear} Uplys. Todos os direitos reservados.
             </p>
-            
-            {/* Redes sociais */}
+
             <div className="flex gap-6 order-1 sm:order-2">
-              {linksSociais.map((social) => (
-                <Link
+              {linksSociais.map((social, i) => (
+                <motion.div
                   key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 transition-all duration-200 hover:scale-110"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                  viewport={{ once: true }}
                 >
-                  <social.icone className="h-5 w-5" />
-                </Link>
+                  <Link
+                    href={social.href}
+                    aria-label={social.label}
+                    className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 transition-all duration-200 hover:scale-110"
+                  >
+                    <social.icone className="h-5 w-5" />
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

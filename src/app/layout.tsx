@@ -18,24 +18,6 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Uplys - Soluções de Crescimento com IA",
   description: "Soluções de crescimento para seu negócio",
-  icons: {
-    icon: "/assets/favicon.ico",
-  },
-  openGraph: {
-    title: "Uplys - Soluções de Crescimento com IA",
-    description: "Soluções de crescimento para seu negócio",
-    url: "https://uplys.vercel.app",
-    siteName: "Uplys",
-    images: [
-      {
-        url: "",
-        width: 800,
-        height: 600,
-      },
-    ],
-    locale: "pt-BR",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
