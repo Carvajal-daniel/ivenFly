@@ -17,7 +17,7 @@ const Index = () => {
         });
 
         if (!res.ok) {
-          router.push("/auth");
+          router.push("/login");
           return;
         }
 
