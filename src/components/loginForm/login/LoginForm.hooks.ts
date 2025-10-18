@@ -31,7 +31,7 @@ export function useLoginForm() {
         });
         if (res.ok) router.push("/dashboard");
       } catch {
-        router.push("/login");
+        router.push("/auth");
       }
     };
     checkAuth();
