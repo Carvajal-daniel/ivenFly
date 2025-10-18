@@ -17,13 +17,13 @@ const Index = () => {
         });
 
         if (!res.ok) {
-          router.push("/login");
+          router.push("/auth");
           return;
         }
 
         setLoading(false); 
       } catch (error) {
-        router.push("/login");
+        router.push("/auth");
       }
     };
 
