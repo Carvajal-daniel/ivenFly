@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const spaceGrotesk = Space_Grotesk({
@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`${poppins.className} ${spaceGrotesk.variable} antialiased`}>
         <Providers>
           {children}
-          <Toaster position="top-right" />
+          <Toaster position="bottom-right" />
         </Providers>
       </body>
     </html>

@@ -28,8 +28,7 @@ export const DesktopNavigation = () => {
     const target = document.querySelector(href);
     if (!target) return;
 
-    // 🧭 Ajuste aqui conforme a altura real do seu header fixo
-    const headerOffset = 90; // Exemplo: 90px
+    const headerOffset = 90; 
     const elementPosition = target.getBoundingClientRect().top;
     const offsetPosition = window.scrollY + elementPosition - headerOffset;
 
