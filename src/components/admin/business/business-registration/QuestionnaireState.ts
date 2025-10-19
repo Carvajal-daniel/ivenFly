@@ -1,7 +1,6 @@
-// src/components/business-registration/QuestionnaireState.ts
 import { useState } from "react";
 import { toast } from "sonner";
-import { BusinessData, INITIAL_FORM_DATA, TOTAL_STEPS } from "./BusinessInterfaces";
+import { BusinessData, INITIAL_FORM_DATA, TOTAL_STEPS, type Address } from "./BusinessInterfaces"; 
 import { createBusiness } from "@/lib/api/business";
 
 export const useQuestionnaireState = () => {
@@ -9,10 +8,13 @@ export const useQuestionnaireState = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [formData, setFormData] = useState<BusinessData>(INITIAL_FORM_DATA);
 
-  const updateField = (field: keyof BusinessData, value: any) => {
+  // ⭐️ CORREÇÃO: Tipagem para evitar 'any' no valor, usando 'unknown' e type casting ⭐️
+  const updateField = (field: keyof BusinessData, value: unknown) => {
     setFormData((prev) => ({ 
       ...prev, 
-      [field]: field === 'address' ? { ...prev.address, ...value } : value 
+      [field]: field === 'address' 
+        ? { ...prev.address, ...(value as Partial<Address>) } // Type assertion para garantir o tipo Address
+        : value 
     }));
   };
 
@@ -61,14 +63,10 @@ export const useQuestionnaireState = () => {
     }
   };
 
-// src/components/business-registration/QuestionnaireState.ts
-// ... (imports)
 
-// ... (dentro de useQuestionnaireState)
-
-  const handleComplete = async (dataToSubmit: BusinessData) => { // <-- Recebe os dados como argumento
+  const handleComplete = async (dataToSubmit: BusinessData) => { 
       // 1. Envio dos dados
-      const result = await createBusiness(dataToSubmit); // Usa os dados passados
+      const result = await createBusiness(dataToSubmit); 
 
       if (!result) {
           console.error("❌ Falha crítica: createBusiness retornou undefined.");
@@ -80,14 +78,20 @@ export const useQuestionnaireState = () => {
 
       if (ok) {
           console.log("✅ Dados do Negócio enviados com sucesso:", dataToSubmit);
-          (window as any).businessData = dataToSubmit;
+          
+          // ⭐️ CORREÇÃO: Uso de 'window' isolado ⭐️
+          if (typeof window !== 'undefined') {
+             // Tipagem para acesso seguro no ambiente de navegador
+             (window as unknown as { businessData: BusinessData }).businessData = dataToSubmit;
+          }
+          
           toast.success("Questionário concluído e dados enviados com sucesso!");
           setIsCompleted(true);
       } else {
           console.error("❌ Erro ao enviar dados:", data);
           
           // 🛑 Detecção do Erro de Sessão/Validação Ausente
-          if (data.message && data.message.includes('Erro ao criar negócio')) {
+          if (data.message && typeof data.message === 'string' && data.message.includes('Erro ao criar negócio')) {
              toast.error("Parece que a sua sessão expirou ou o formulário não foi totalmente preenchido. Por favor, preencha todos os campos obrigatórios e tente novamente.");
           } else {
              toast.error(data.message || "Falha ao concluir o questionário e enviar os dados.");
@@ -106,12 +110,10 @@ export const useQuestionnaireState = () => {
       if (currentStep < TOTAL_STEPS) {
         setCurrentStep((prev) => prev + 1);
       } else {
-        // 2. Passa o estado ATUAL do formulário para handleComplete
         await handleComplete(formData); 
       }
   };
 
-// ...
 
   const handleBack = () => {
     if (currentStep > 0) {

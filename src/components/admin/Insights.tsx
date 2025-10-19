@@ -1,5 +1,4 @@
 
-import DashboardLayout from "@/app/dashboard/layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, TrendingDown, Activity } from "lucide-react";
 

@@ -1,10 +1,11 @@
-// src/components/business-registration/Step02Address.tsx
+// src/components/admin/business/business-Questions/Step02Address.tsx
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { QuestionStepProps } from "./QuestionStep";
+import { QuestionStepProps } from "./QuestionStep"; 
 
 const Step02Address = ({ formData, updateField }: QuestionStepProps) => {
   const [cepLoading, setCepLoading] = useState(false);
@@ -26,13 +27,15 @@ const Step02Address = ({ formData, updateField }: QuestionStepProps) => {
         ...formData.address, 
         cep: cep,
         logradouro: data.logradouro || "",
-        complemento: data.complemento || "",
+        complemento: data.complemento || null,
         bairro: data.bairro || "",
         localidade: data.localidade || "",
         uf: data.uf || "",
       });
       toast.success("Endereço encontrado!");
-    } catch (error) {
+      
+    } catch (error: unknown) { // 🛑 CORREÇÃO (35:21): Trocado 'any' por 'unknown'
+      console.error("Erro ao buscar CEP:", error); // 🛑 CORREÇÃO (35:14): Uso de 'error' no log
       toast.error("Erro ao buscar CEP");
     } finally {
       setCepLoading(false);

@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         
         <div className="flex-1 flex flex-col w-full">
           <header className="sticky top-0 z-10 h-16 border-b border-border bg-card/80 backdrop-blur-sm flex items-center px-4 gap-4 shadow-sm">
-            <SidebarTrigger className="text-white hover:bg-accent hover:text-white transition-colors">
+            <SidebarTrigger className="text-white hover:bg-accent hover:text-white   transition-colors">
               <Menu className="h-5 w-5" />
             </SidebarTrigger>
             <h1 className="text-lg font-semibold text-foreground">Dashboard</h1>

@@ -1,6 +1,3 @@
-// src/components/business-registration/QuestionStep.tsx
-
-// Importações dos novos componentes de etapa
 import type { BusinessData } from "../business-registration/BusinessInterfaces";
 import Step00Name from "./Step00Name";
 import Step01Niche from "./Step01Niche";
@@ -20,11 +17,11 @@ import Step12ReportFrequency from "./Step12ReportFrequency";
 export interface QuestionStepProps {
   step: number;
   formData: BusinessData;
-  updateField: (field: keyof BusinessData, value: any) => void;
+  // ⭐️ CORREÇÃO: Trocamos 'any' por 'unknown' para resolver o erro de compilação.
+  updateField: (field: keyof BusinessData, value: unknown) => void; 
 }
 
 const QuestionStep = (props: QuestionStepProps) => {
-  // O switch agora apenas renderiza o componente específico para cada etapa.
   switch (props.step) {
     case 0:
       return <Step00Name {...props} />;
