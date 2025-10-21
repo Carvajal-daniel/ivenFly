@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={`${poppins.className} ${spaceGrotesk.variable} antialiased`}>
+      <body className={` ${poppins.className} ${spaceGrotesk.variable} antialiased`}>
         <Providers>
           {children}
           <Toaster position="bottom-right" />

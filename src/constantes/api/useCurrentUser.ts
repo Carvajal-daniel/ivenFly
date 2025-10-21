@@ -1,8 +1,7 @@
-// src/hooks/useCurrentUser.ts (Código Corrigido e Otimizado)
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'; 
+import { useEffect, useState, useCallback } from "react";
+import { useRouter, usePathname } from 'next/navigation';
 import { toast } from 'sonner';
 
 interface User {
@@ -14,54 +13,56 @@ interface User {
 export function useCurrentUser() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); 
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const PUBLIC_ROUTES = ['/', '/auth', '/cadastro', '/recuperar-senha'];
+
+  const redirectToLogin = useCallback(() => {
+    if (!PUBLIC_ROUTES.includes(pathname)) {
+      sessionStorage.setItem('redirectTo', pathname);
+      router.replace('/auth');
+      toast.info("Sua sessão expirou ou você precisa fazer login.");
+    }
+  }, [router, pathname]);
 
   useEffect(() => {
-    
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    
-    if (!API_URL) {
-        console.error("Variável NEXT_PUBLIC_API_URL não definida.");
-        setLoading(false);
-        return;
-    }
-
     const fetchUser = async () => {
-      setLoading(true);
       try {
-        const res = await fetch(`${API_URL}/api/dashboard`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard`, {
           credentials: "include",
-          cache: 'no-store', 
+          cache: "no-store",
         });
 
         if (res.status === 401 || res.status === 403) {
-         
           setUser(null);
-       
+          redirectToLogin();
           return;
         }
 
         if (!res.ok) {
-            // Tratar outros erros de rede/servidor (500, etc.)
-            toast.error("Falha ao carregar dados do usuário.");
-            setUser(null);
-            return;
+          setUser(null);
+          toast.error("Falha ao carregar dados do usuário.");
+          return;
         }
 
         const data = await res.json();
-        setUser(data.user || null);
+        if (data.user) setUser(data.user);
+        else {
+          setUser(null);
+          redirectToLogin();
+        }
       } catch (e) {
         console.error("Erro na requisição de usuário:", e);
+        toast.error("Problema de conexão com o servidor. 😥");
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
 
-    // A chamada ocorre APÓS a montagem inicial do componente, garantindo que seja Client-Side.
     fetchUser();
-    
-  }, [router]); // Adicionamos 'router' às dependências por boa prática do Next.js
+  }, [redirectToLogin]);
 
   return { user, loading, isAuthenticated: !!user };
 }
