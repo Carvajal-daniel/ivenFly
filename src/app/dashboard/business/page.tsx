@@ -1,10 +1,10 @@
-import BusinessQuestionnaire from "@/components/admin/business/business-registration/BusinessQuestionnaire";
+import { BusinessRegistrationForm } from "@/components/admin/business/BusinessRegistrationForm";
 
 const Index = () => {
   return(
 
     <main className="-mt-30">
-      <BusinessQuestionnaire />
+      <BusinessRegistrationForm />
     </main>
   )
 };

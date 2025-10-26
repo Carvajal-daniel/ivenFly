@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
-import { PanelLeftIcon } from "lucide-react"
+import {  ChevronLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
 import { cn } from "@/lib/utils"
@@ -269,7 +269,7 @@ function SidebarTrigger({
       {...props}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      <PanelLeftIcon className={cn(
+      <ChevronLeft className={cn(
         "transition-all duration-500 ease-out relative z-10",
         state === "collapsed" && "rotate-180 scale-110"
       )} />

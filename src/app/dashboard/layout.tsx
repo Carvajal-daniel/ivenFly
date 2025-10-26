@@ -1,9 +1,10 @@
-
 "use client";
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Menu } from "lucide-react";
+import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/admin/AppSidebar";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -12,26 +13,44 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <SidebarProvider>
-     
-      <div className="flex min-h-screen w-full bg-background relative"> 
-        
-
-        <AppSidebar />
-        
-        
-        <div className="flex-1 flex flex-col min-w-0"> 
-          <header className="sticky top-0 z-10 h-16 border-b border-border bg-card/80 backdrop-blur-sm flex items-center px-4 gap-4 shadow-sm">
-            <SidebarTrigger className="text-white hover:bg-accent hover:text-white transition-colors">
-              <Menu className="h-5 w-5" />
-            </SidebarTrigger>
-            <h1 className="text-lg font-semibold text-foreground">Dashboard</h1>
-          </header>
-          
-          <main className="flex-1 overflow-auto animate-fade-in">
-            {children}
-          </main>
-        </div>
-      </div>
+      <AppSidebar />
+      <DashboardContent>{children}</DashboardContent>
     </SidebarProvider>
+  );
+}
+
+function DashboardContent({ children }: { children: React.ReactNode }) {
+  const { state, toggleSidebar } = useSidebar();
+  const isCollapsed = state === "collapsed";
+
+  return (
+    <div className="flex flex-col w-full min-h-screen bg-background transition-all duration-300">
+      {/* Header */}
+      <header className="flex bg-transparent fixed items-center justify-between h-16 border-b border-border px-4  z-40">
+        <div className="flex items-center gap-3">
+          {/* Botão animado do sidebar */}
+        <Button
+            variant="ghost"
+            size="lg"
+            onClick={toggleSidebar}
+            className="w-10 p-4 rounded-md md:-ml-3 fixed -ml-3 cursor-pointer z-10 hover:bg-accent/50 hover:scale-105 transition-all duration-200 active:scale-95"
+          >
+            <motion.div
+              animate={{ rotate: isCollapsed ? 180 : 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <ChevronRight className="h-8 w-8 text-foreground/80 drop-shadow-sm" />
+            </motion.div>
+          </Button>
+       
+        </div>
+      </header>
+
+      {/* Conteúdo */}
+      <main className="flex-1 overflow-auto animate-fade-in p-6">
+        {children}
+      </main>
+    </div>
   );
 }

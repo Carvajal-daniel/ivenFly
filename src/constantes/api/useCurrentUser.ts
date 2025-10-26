@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useRouter, usePathname } from 'next/navigation';
-import { toast } from 'sonner';
+import { useRouter, usePathname } from "next/navigation";
+import { toast } from "sonner";
 
 interface User {
   id: string;
@@ -16,9 +16,10 @@ export function useCurrentUser() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const PUBLIC_ROUTES = ['/', '/auth', '/cadastro', '/recuperar-senha'];
-
   const redirectToLogin = useCallback(() => {
+    // PUBLIC_ROUTES definido dentro do hook para evitar warning de dependência
+    const PUBLIC_ROUTES = ['/', '/auth', '/cadastro', '/recuperar-senha'];
+
     if (!PUBLIC_ROUTES.includes(pathname)) {
       sessionStorage.setItem('redirectTo', pathname);
       router.replace('/auth');
@@ -52,8 +53,8 @@ export function useCurrentUser() {
           setUser(null);
           redirectToLogin();
         }
-      } catch (e) {
-        console.error("Erro na requisição de usuário:", e);
+      } catch (error) {
+        console.error("Erro na requisição de usuário:", error);
         toast.error("Problema de conexão com o servidor. 😥");
         setUser(null);
       } finally {

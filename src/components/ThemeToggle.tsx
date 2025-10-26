@@ -18,7 +18,7 @@ export function ThemeToggle() {
   return (
     <motion.button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative flex md:ml-6 items-center justify-center w-12 h-10 rounded-2xl transition-all duration-300 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-800 dark:to-gray-900 hover:shadow-lg hover:shadow-primary/20 dark:hover:shadow-yellow-500/20 hover:scale-105 border border-gray-600 dark:border-gray-700 group overflow-hidden"
+      className="relative cursor-pointer flex md:ml-6 items-center justify-center w-12 h-10 rounded-2xl transition-all duration-300 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-800 dark:to-gray-900 hover:shadow-lg hover:shadow-primary/20 dark:hover:shadow-yellow-500/20 hover:scale-105 border border-gray-600 dark:border-gray-700 group overflow-hidden"
       aria-label="Alternar tema"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
