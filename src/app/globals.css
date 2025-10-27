@@ -15,10 +15,15 @@
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
-html{
-  font-size: 95%
+html {
+  font-size: 16px;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; /* garante 16px */
+  line-height: 1.5;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-space-grotesk);
   font-weight: 600;

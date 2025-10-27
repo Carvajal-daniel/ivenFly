@@ -14,7 +14,14 @@ interface StepFiveMarketingProps {
 }
 
 const SOCIAL_PLATFORMS = ["Instagram", "Facebook", "TikTok", "WhatsApp Business", "LinkedIn"];
-const POSTING_FREQUENCY_OPTIONS = ["Diariamente", "3x por semana", "1x por semana", "Quinzenalmente", "Mensalmente"];
+const POSTING_FREQUENCY_OPTIONS = [
+  "Diariamente",
+  "3x por semana",
+  "2x por semana",
+  "1x por semana",
+  "Casualmente"
+];
+
 
 export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingProps) {
   return (
@@ -193,7 +200,7 @@ export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingPr
           <div className="w-full border-t-2 border-gray-200"></div>
         </div>
         <div className="relative flex justify-center">
-          <span className="px-4 text-xs font-semibold text-gray-500 bg-background">
+          <span className="px-4 text-xs font-semibold text-gray-500 bg-background dark:bg-primary rounded-2xl">
             DESAFIOS
           </span>
         </div>

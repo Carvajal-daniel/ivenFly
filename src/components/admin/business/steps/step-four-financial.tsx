@@ -24,7 +24,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
           <div className="p-1.5 bg-gray-100 rounded-lg">
             <PiggyBank className="h-4 w-4 text-gray-600" />
           </div>
-          <h4 className="text-sm sm:text-base font-semibold text-gray-700">
+          <h4 className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-200">
             Fluxo de Caixa
             <span className="text-xs font-normal text-gray-500 ml-2">(Opcional)</span>
           </h4>
@@ -192,16 +192,16 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
         <div className="text-center space-y-3">
           <div className="flex items-center justify-center gap-2">
             <div className="p-2 bg-primary/20 rounded-lg">
-              <DollarSign className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <DollarSign className="h-5 w-5 sm:h-4 sm:w-4 text-primary" />
             </div>
-            <p className="text-sm sm:text-base font-semibold text-gray-700">
+            <p className="text-sm sm:text-md font-semibold text-gray-700 dark:text-gray-200">
               Preço Médio Estimado
             </p>
           </div>
-          <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary">
+          <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-primary">
             R$ {calculateAveragePrice()}
           </p>
-          <p className="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
+          <p className="text-xs sm:text-md text-gray-500 max-w-md mx-auto">
             Calculado automaticamente com base nos valores mínimo e máximo
           </p>
         </div>
@@ -213,7 +213,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
           <div className="w-full border-t-2 border-gray-200"></div>
         </div>
         <div className="relative flex justify-center">
-          <span className="px-4 text-xs font-semibold text-gray-500 bg-background">
+          <span className="px-4 text-xs font-semibold text-gray-500 bg-background dark:bg-primary rounded-2xl">
             RELATÓRIOS
           </span>
         </div>

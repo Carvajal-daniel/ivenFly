@@ -16,8 +16,7 @@ interface StepOneBasicInfoProps {
 export function StepOneBasicInfo({ form }: StepOneBasicInfoProps) {
   return (
     <div className="space-y-6 sm:space-y-8">
-      
-     
+    
 
       {/* Nome do Negócio - Destaque Principal */}
       <UICard className="p-4 sm:p-5 border-2 border-primary/30  from-primary/5 to-transparent shadow-md hover:shadow-lg transition-all dark:bg-primary/10">
@@ -34,7 +33,7 @@ export function StepOneBasicInfo({ form }: StepOneBasicInfoProps) {
             </div>
             <FormControl>
               <Input 
-                placeholder="Ex: Barberia do Zé" 
+                placeholder="Ex: Uplys Tech Solutions" 
                 {...field} 
                 className="h-11 sm:h-12 border-2 focus:border-primary transition-all text-sm sm:text-base font-medium dark:bg-card dark:text-card-foreground" 
               />

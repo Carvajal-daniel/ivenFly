@@ -31,7 +31,7 @@ export const formSchema = z.object({
   minServicePrice: z.coerce.number().min(0.01, "Preço mínimo é obrigatório"), 
   maxServicePrice: z.coerce.number().min(0.01, "Preço máximo é obrigatório"), 
   usesSocialMedia: z.boolean().default(false),
-  socialPlatforms: z.array(z.string()).min(1, "Selecione pelo menos uma plataforma social").optional(),
+  socialPlatforms: z.array(z.string()).optional(),
   challenges: z.string().min(10, "Desafios devem ter pelo menos 10 caracteres"),
   reportFrequency: z.enum(["diária", "semanal", "mensal"], { required_error: "A frequência é obrigatória" }),
   capacity: z.coerce.number().min(1, "Capacidade mínima é 1"),

@@ -79,7 +79,7 @@ export function StepThreeServices({ form, selectedNiche }: StepThreeServicesProp
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {AMENITIES_LIST.map((amenity) => {
             const Icon = amenity.icon;
             const fieldName = `amenities.${amenity.name}` as Path<FormValues>;
@@ -93,44 +93,46 @@ export function StepThreeServices({ form, selectedNiche }: StepThreeServicesProp
                   <FormItem>
                     <label 
                       htmlFor={amenity.name} 
-                      className={`flex flex-col justify-between p-4 rounded-xl border-2 cursor-pointer relative w-full min-h-[110px] sm:min-h-[120px]
+                      className={`flex items-start gap-3 p-4 rounded-xl border-2 cursor-pointer relative w-full
                                   transition-all duration-300 group
                                   ${field.value 
-                                    ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-primary shadow-md scale-[1.02] ' 
-                                    : 'hover:bg-gray-50 hover:border-primary/40 dark:hover:bg-gray-800 border-gray-200 hover:scale-[1.01]'
+                                    ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-primary shadow-md' 
+                                    : 'hover:bg-gray-50 hover:border-primary/40 dark:hover:bg-gray-800 border-gray-700'
                                   }`}
                     >
-                      {/* Checkbox */}
-                      <FormControl className="absolute top-3 right-3 z-10">
+                      {/* Ícone à esquerda */}
+                      <div className={`p-2.5 rounded-lg shrink-0 transition-colors ${
+                        field.value 
+                          ? 'bg-primary/20' 
+                          : 'bg-gray-100 group-hover:bg-primary/10 dark:bg-gray-700 dark:group-hover:bg-primary/10'
+                      }`}>
+                        <Icon className={`h-5 w-5 transition-colors ${
+                          field.value ? 'text-primary' : 'text-gray-500 group-hover:text-primary dark:text-gray-400'
+                        }`} />
+                      </div>
+                      
+                      {/* Conteúdo central */}
+                      <div className="flex-1 min-w-0 pt-0.5">
+                        <FormLabel className="font-bold text-sm cursor-pointer block leading-tight">
+                          {amenity.label}
+                        </FormLabel>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-snug">
+                          {amenity.desc}
+                        </p>
+                      </div>
+                      
+                      {/* Checkbox à direita */}
+                      <FormControl className="shrink-0 pt-0.5">
                         <Checkbox 
                           id={amenity.name}
                           onCheckedChange={field.onChange} 
                           className={`h-5 w-5 border-2 transition-all
                             ${field.value 
                               ? 'bg-primary border-primary' 
-                              : 'border-gray-300 group-hover:border-primary/60'
+                              : 'border--300 group-hover:border-primary/60'
                             }`}
                         />
                       </FormControl>
-                      
-                      {/* Conteúdo */}
-                      <div className="flex flex-col space-y-2 mt-auto pr-8">
-                        <div className={`p-2 rounded-lg w-fit transition-colors ${
-                          field.value 
-                            ? 'bg-primary/20' 
-                            : 'bg-gray-100 group-hover:bg-primary/10'
-                        }`}>
-                          <Icon className={`h-5 w-5 sm:h-6 sm:w-6 transition-colors ${
-                            field.value ? 'text-primary' : 'text-gray-500 group-hover:text-primary'
-                          }`} />
-                        </div>
-                        <div>
-                          <FormLabel className="font-bold text-sm sm:text-base cursor-pointer block">
-                            {amenity.label}
-                          </FormLabel>
-                          <p className="text-xs text-gray-500 mt-0.5">{amenity.desc}</p>
-                        </div>
-                      </div>
                     </label>
                   </FormItem>
                 )}
@@ -229,7 +231,7 @@ export function StepThreeServices({ form, selectedNiche }: StepThreeServicesProp
                 htmlFor="delivery-checkbox"
                 className={`flex items-start gap-4 rounded-xl border-2 p-4 sm:p-5 transition-all cursor-pointer w-full group
                   ${field.value 
-                    ? 'border-green-500 bg-gradient-to-br from-green-50 to-green-50/50 shadow-lg scale-[1.01]' 
+                    ? 'border-green-500 bg-gradient-to-br from-green-50 to-green-50/50 dark:from-green-900 dark:to-green-900/50 shadow-lg scale-[1.01]' 
                     : 'hover:border-green-400 hover:bg-green-50/30 border-gray-200'
                   }`}
               >
@@ -259,7 +261,7 @@ export function StepThreeServices({ form, selectedNiche }: StepThreeServicesProp
                     </FormLabel>
                   </div>
                   <p className={`text-xs sm:text-sm transition-colors ${
-                    field.value ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600'
+                    field.value ? 'text-green-600 dark:text-green-400' : 'text-gray-500 group-hover:text-green-600'
                   }`}>
                     Marque se você possui serviços próprios ou utiliza aplicativos de entrega
                   </p>

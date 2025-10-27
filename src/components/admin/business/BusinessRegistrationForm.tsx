@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { useForm, Path } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Building2, MapPin, Wifi, DollarSign, CheckCircle2, Clock, ArrowLeft } from "lucide-react";
+import { Building2, MapPin, Wifi, DollarSign, CheckCircle2, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,6 +16,8 @@ import { StepFourFinancial } from "./steps/step-four-financial";
 import { StepFiveMarketing } from "./steps/step-five-marketing";
 import { StepSixHours } from "./steps/step-six-hours";
 import { SuccessMessage } from "./success-message.tsxsuccess-message";
+import { createBusiness } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const FIELDS_BY_STEP: Record<number, ReadonlyArray<keyof FormValues | `location.${keyof FormValues['location']}`>> = {
   1: ["name", "niche", "description", "operatingYears"],
@@ -27,6 +29,7 @@ const FIELDS_BY_STEP: Record<number, ReadonlyArray<keyof FormValues | `location.
 };
 
 export function BusinessRegistrationForm() {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [loadingCep, setLoadingCep] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -51,7 +54,6 @@ export function BusinessRegistrationForm() {
 
   const fetchAddressByCep = async (cep: string) => {
     if (!cep) return;
-
     const cleanCep = cep.replace(/\D/g, "");
     if (cleanCep.length !== 8) return;
 
@@ -87,19 +89,25 @@ export function BusinessRegistrationForm() {
     return numMin >= 0 && numMax >= 0 ? ((numMin + numMax) / 2).toFixed(2) : "0.00";
   }, [form]);
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const avgServicePrice = calculateAveragePrice();
     const finalData = { ...data, avgServicePrice: parseFloat(avgServicePrice) };
 
-    console.log("Business Registration Data:", finalData);
-    setSubmittedBusinessName(data.name);
-    setShowSuccess(true);
+    const response = await createBusiness(finalData);
+
+    if (response.ok) {
+      toast.success("Negócio cadastrado com sucesso!");
+      setSubmittedBusinessName(data.name);
+      setShowSuccess(true);
+    } else {
+      toast.error(response.error || "Erro ao cadastrar o negócio.");
+    }
   };
 
   const handleCloseSuccess = () => {
     setShowSuccess(false);
-    setStep(1);
     form.reset();
+    router.push("/dashboard"); // redireciona após fechar a mensagem
   };
 
   const getFieldsToValidate = (currentStep: number) => {
@@ -122,11 +130,12 @@ export function BusinessRegistrationForm() {
 
   const handleFinalSubmit = async () => {
     const isValid = await form.trigger();
-    if (isValid) {
-      form.handleSubmit(onSubmit)();
-    } else {
+    if (!isValid) {
       toast.error("Por favor, corrija os erros do formulário antes de cadastrar.");
+      return;
     }
+
+    await form.handleSubmit(onSubmit)();
   };
 
   const prevStep = () => setStep(step - 1);
@@ -159,12 +168,14 @@ export function BusinessRegistrationForm() {
 
   return (
     <>
-      <div className="min-h-screen p-4 md:p-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen py-4">
+        <div className="max-w-4xl mx-auto md:py-6">
           <div className="text-center mb-8 space-y-3">
-            <div className="inline-block animate-bounce"><Building2 className="h-16 w-16 text-primary mx-auto mb-2" /></div>
-            <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text from-primary to-primary/60">Cadastro de Negócio</h1>
-            <p className="text-muted-foreground text-lg">Preencha as informações do seu negócio e comece a gerenciar melhor</p>
+            <div className="inline-block animate-bounce">
+              <Building2 className="h-16 w-16 text-primary mx-auto mb-2" />
+            </div>
+            <h1 className="text-2xl md:text-4xl font-bold mt-4 text-black/80 dark:text-white">Cadastro de Negócio</h1>
+            <p className="text-muted-foreground text-md">Preencha as informações do seu negócio e comece a gerenciar melhor</p>
           </div>
           <div className="mb-8 flex justify-center gap-2">
             {[1, 2, 3, 4, 5, 6].map((s) => (
@@ -189,9 +200,9 @@ export function BusinessRegistrationForm() {
                     </Button>
                   )}
                   {step < 6 ? (
-                    <Button type="button" onClick={nextStep} className="flex-1 h-12 text-base bg-primary hover:bg-primary/90">Próximo →</Button>
+                    <Button type="button" onClick={nextStep} className="flex-1 h-12 text-base bg-primary hover:bg-primary/90">Próximo <span><ArrowRight className="ml-2 h-5 w-5" /></span></Button>
                   ) : (
-                    <Button type="button" onClick={handleFinalSubmit} className="flex-1 h-12 text-base bg-primary hover:bg-primary/90 font-semibold">
+                    <Button type="button" onClick={handleFinalSubmit} className="flex items-center justify-center h-12 text-base bg-primary hover:bg-primary/90 font-semibold">
                       <CheckCircle2 className="mr-2 h-5 w-5" /> Cadastrar Negócio
                     </Button>
                   )}
