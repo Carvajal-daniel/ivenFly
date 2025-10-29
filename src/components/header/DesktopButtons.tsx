@@ -32,9 +32,9 @@ export const DesktopButtons = () => {
         whileTap={{ scale: 0.95 }}
       >
         {user ? (
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-md">
+          <div className="flex gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-md">
             <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold text-sm bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="font-semibold text-sm text-black/70 dark:text-blue-400">
               Olá, {user.name ?? "Usuário"}
             </span>
           </div>

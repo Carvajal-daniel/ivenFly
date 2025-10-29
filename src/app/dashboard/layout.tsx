@@ -5,12 +5,36 @@ import { AppSidebar } from "@/components/admin/AppSidebar";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useCurrentUser } from "@/constantes/api/useCurrentUser";
 
-interface DashboardLayoutProps {
+interface ProtectedDashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function ProtectedDashboardLayout({ children }: ProtectedDashboardLayoutProps) {
+  const { user, loading, isAuthenticated } = useCurrentUser();
+  const [showContent, setShowContent] = useState(false);
+  const router = useRouter();
+
+
+  useEffect(() => {
+    if (!loading) {
+      const timer = setTimeout(() => setShowContent(true), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.replace("/auth");
+    }
+  }, [loading, isAuthenticated, router]);
+
+  if (loading || !showContent || !isAuthenticated) return <LoadingSpinner />;
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -20,16 +44,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 }
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
-  const { state, toggleSidebar } = useSidebar();
+  const { state, toggleSidebar } = useSidebar(); // Agora dentro do provider
   const isCollapsed = state === "collapsed";
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-background transition-all duration-300">
       {/* Header */}
-      <header className="flex bg-transparent fixed items-center justify-between h-16 border-b border-border px-4  z-40">
+      <header className="flex bg-transparent fixed items-center justify-between h-16 border-b border-border px-4 z-40">
         <div className="flex items-center gap-3">
-          {/* Botão animado do sidebar */}
-        <Button
+          <Button
             variant="ghost"
             size="lg"
             onClick={toggleSidebar}
@@ -43,14 +66,11 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
               <ChevronRight className="h-8 w-8 text-foreground/80 drop-shadow-sm" />
             </motion.div>
           </Button>
-       
         </div>
       </header>
 
       {/* Conteúdo */}
-      <main className="flex-1 overflow-auto animate-fade-in p-6">
-        {children}
-      </main>
+      <main className="flex-1 overflow-auto animate-fade-in p-6">{children}</main>
     </div>
   );
 }

@@ -17,7 +17,6 @@ export function useCurrentUser() {
   const pathname = usePathname();
 
   const redirectToLogin = useCallback(() => {
-    // PUBLIC_ROUTES definido dentro do hook para evitar warning de dependência
     const PUBLIC_ROUTES = ['/', '/auth', '/cadastro', '/recuperar-senha'];
 
     if (!PUBLIC_ROUTES.includes(pathname)) {
@@ -35,9 +34,18 @@ export function useCurrentUser() {
           cache: "no-store",
         });
 
-        if (res.status === 401 || res.status === 403) {
+        if (res.status === 401) {
+          // Sessão expirada ou token inválido
           setUser(null);
           redirectToLogin();
+          return;
+        }
+
+        if (res.status === 403) {
+          // Conta inativa
+          setUser(null);
+          toast.error("Conta inativa. Ative sua conta para acessar.");
+          router.replace("/"); 
           return;
         }
 
@@ -48,8 +56,9 @@ export function useCurrentUser() {
         }
 
         const data = await res.json();
-        if (data.user) setUser(data.user);
-        else {
+        if (data.user) {
+          setUser(data.user);
+        } else {
           setUser(null);
           redirectToLogin();
         }
@@ -63,7 +72,7 @@ export function useCurrentUser() {
     };
 
     fetchUser();
-  }, [redirectToLogin]);
+  }, [redirectToLogin, router, pathname]);
 
   return { user, loading, isAuthenticated: !!user };
 }

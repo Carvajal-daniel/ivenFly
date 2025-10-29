@@ -25,13 +25,10 @@ export function useLoginForm() {
     }
   }, []);
 
-  // ***************************************************************
-  // *** PONTO DE CORREÇÃO: Usar o Proxy no useEffect de checagem ***
-  // ***************************************************************
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // USE O ENDPOINT DO PROXY QUE ESTÁ FUNCIONANDO
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/dashboard`, { 
           method: "GET",
           credentials: "include",
@@ -42,12 +39,9 @@ export function useLoginForm() {
         if (res.ok) {
            router.replace("/dashboard"); 
         }
-        
-        // Se res.status for 401/403, o código segue normalmente e o formulário é exibido.
+    
 
       } catch (e) {
-        // Se for erro de rede/CORS, exibe o formulário (ou lida com o erro,
-        // mas não faz redirecionamento de /auth para /auth)
         console.error("Erro na verificação inicial de autenticação:", e);
       }
     };
@@ -78,12 +72,7 @@ export function useLoginForm() {
       if (values.rememberMe) localStorage.setItem("rememberEmail", values.email);
       else localStorage.removeItem("rememberEmail");
 
-      // *********************************************************
-      // *** Ajuste final: Usar replace e refresh ***
-      // *********************************************************
-      
-      // O router.replace deve ser suficiente, mas refresh garante que o
-      // middleware seja reavaliado.
+   
       router.replace("/dashboard"); 
       router.refresh(); 
 
