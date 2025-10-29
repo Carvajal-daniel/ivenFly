@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function ThemeToggle() {
@@ -16,41 +15,74 @@ export function ThemeToggle() {
   const isDark = theme === "dark";
 
   return (
-    <motion.button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative cursor-pointer flex md:ml-6 items-center justify-center w-12 h-10 rounded-2xl transition-all duration-300 bg-gradient-to-br from-gray-700 to-gray-800 dark:from-gray-800 dark:to-gray-900 hover:shadow-lg hover:shadow-primary/20 dark:hover:shadow-yellow-500/20 hover:scale-105 border border-gray-600 dark:border-gray-700 group overflow-hidden"
-      aria-label="Alternar tema"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-    >
-      {/* Background glow effect */}
+    <div className="flex items-center gap-3 md:ml-6">
+      {/* Ícone do Sol */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-yellow-500/20 dark:to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        initial={false}
-      />
-
-      {/* Icons with animation */}
-      <div className="relative z-10">
-        <motion.div
-          key={isDark ? "sun" : "moon"}
-          initial={{ rotate: -180, opacity: 0, scale: 0.5 }}
-          animate={{ rotate: 0, opacity: 1, scale: 1 }}
-          exit={{ rotate: 180, opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+        animate={{
+          scale: !isDark ? 1.2 : 1,
+          opacity: !isDark ? 1 : 0.4,
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-amber-500"
         >
-          {isDark ? (
-            <Sun className="w-6 h-6 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />
-          ) : (
-            <Moon className="w-6 h-6 text-blue-200 drop-shadow-[0_0_8px_rgba(191,219,254,0.5)]" />
-          )}
-        </motion.div>
-      </div>
+          <circle cx="12" cy="12" r="5" fill="currentColor" />
+          <path
+            d="M12 1v3m0 16v3M23 12h-3M4 12H1m18.364-6.364l-2.121 2.121M6.757 17.243l-2.121 2.121m12.728 0l-2.121-2.121M6.757 6.757L4.636 4.636"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      </motion.div>
 
-      {/* Shine effect on hover */}
+      {/* Toggle Switch */}
+      <motion.button
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        className="relative w-14 h-7 rounded-full transition-colors duration-500 bg-gray-300 dark:bg-gray-700 border-2 border-gray-400 dark:border-gray-600"
+        aria-label="Alternar tema"
+        whileTap={{ scale: 0.95 }}
+      >
+        {/* Bolinha que se move */}
+        <motion.div
+          className="absolute top-0.5 w-5 h-5 md:mt-0.5 rounded-full bg-white dark:bg-gray-900 shadow-lg"
+          animate={{
+            x: isDark ? 26 : 2,
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 700,
+            damping: 40,
+          }}
+        />
+      </motion.button>
+
+      {/* Ícone da Lua */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-        initial={false}
-      />
-    </motion.button>
+        animate={{
+          scale: isDark ? 1.2 : 1,
+          opacity: isDark ? 1 : 0.4,
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-indigo-500"
+        >
+          <path
+            d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            fill="currentColor"
+          />
+        </svg>
+      </motion.div>
+    </div>
   );
 }

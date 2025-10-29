@@ -48,7 +48,7 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
-      className="relative  bg-white dark:bg-gray-950 text-center md:text-left"
+      className="relative overflow-hidden bg-white dark:bg-gray-950 text-center md:text-left"
     >
       {/* Gradiente sutil */}
       <div className="absolute inset-0 bg-gradient-to-t from-transparent via-gray-50/50 dark:via-gray-900/50 to-gray-100/20 dark:to-gray-800/20 pointer-events-none" />
