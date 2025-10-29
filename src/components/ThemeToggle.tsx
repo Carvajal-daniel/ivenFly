@@ -50,7 +50,7 @@ export function ThemeToggle() {
       >
         {/* Bolinha que se move */}
         <motion.div
-          className="absolute top-0.5 w-5 h-5 md:mt-0.5 rounded-full bg-white dark:bg-gray-900 shadow-lg"
+          className="absolute top-0.5 w-5 h-5 rounded-full bg-white dark:bg-gray-900 shadow-lg"
           animate={{
             x: isDark ? 26 : 2,
           }}
