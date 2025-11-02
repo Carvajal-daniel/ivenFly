@@ -1,3 +1,4 @@
+// src/lib/api/business.ts
 import type { FormValues } from "@/components/admin/business/form-schema";
 import type { ApiResponse } from "@/types/api.types";
 
@@ -10,19 +11,33 @@ export const createBusiness = async (data: FormValues): Promise<ApiResponse> => 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-      credentials: "include", // envia cookies automaticamente
+      credentials: "include",
     });
 
-    const result = await response.json();
+    let result: unknown;
+    try {
+      result = await response.json();
+    } catch {
+      result = { message: `Erro inesperado do servidor. Status: ${response.status}` };
+    }
 
     if (!response.ok) {
-      console.error("❌ Erro na criação do negócio:", result);
-      return { ok: false, error: result?.message || "Erro ao criar o negócio." };
+      const message =
+        typeof result === "object" && result && "message" in result
+          ? (result as { message?: string }).message
+          : undefined;
+
+      return {
+        ok: false,
+        error: message ?? "Erro ao criar o negócio no servidor.",
+      };
     }
 
     return { ok: true, data: result };
-  } catch (error) {
-    console.error("❌ Erro ao conectar com a API:", error);
-    return { ok: false, error: "Falha na comunicação com o servidor." };
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Falha na comunicação com o servidor.";
+
+    return { ok: false, error: message };
   }
 };

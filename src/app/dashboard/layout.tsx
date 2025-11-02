@@ -15,7 +15,7 @@ interface ProtectedDashboardLayoutProps {
 }
 
 export default function ProtectedDashboardLayout({ children }: ProtectedDashboardLayoutProps) {
-  const { user, loading, isAuthenticated } = useCurrentUser();
+  const {  loading, isAuthenticated } = useCurrentUser();
   const [showContent, setShowContent] = useState(false);
   const router = useRouter();
 
