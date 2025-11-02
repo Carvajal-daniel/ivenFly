@@ -2,8 +2,7 @@ import { UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { InfoTooltip } from "@/components/ui/info-tooltip";
-import { Card as UICard } from "@/components/ui/card";
-import { MapPin, Hash, Building2, Users, Loader2 } from "lucide-react";
+import { MapPin, Hash, Building2, Users, Loader2, Check } from "lucide-react";
 import type { FormValues } from "../form-schema";
 
 interface StepTwoLocationProps {
@@ -13,22 +12,32 @@ interface StepTwoLocationProps {
 }
 
 export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwoLocationProps) {
+  const watchedValues = form.watch();
+  
+  const isCepFilled = watchedValues.location?.cep && watchedValues.location.cep.length > 0;
+  const isStreetFilled = watchedValues.location?.street && watchedValues.location.street.length > 0;
+  const isNumberFilled = watchedValues.location?.number && watchedValues.location.number.length > 0;
+  const isCityFilled = watchedValues.location?.city && watchedValues.location.city.length > 0;
+  const isStateFilled = watchedValues.location?.state && watchedValues.location.state.length > 0;
+  const isCapacityFilled = watchedValues.capacity !== undefined && watchedValues.capacity !== null && watchedValues.capacity.toString() !== '';
+
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="max-w-[50rem] mx-auto space-y-6">
       
-
-
-      {/* CEP Field com Card Destacado */}
-      <UICard className="p-4 sm:p-5 border-2 border-primary/30  from-primary/5 to-transparent shadow-md">
+      {/* CEP */}
+      <div className={`p-6 rounded-xl transition-all duration-300 ${isCepFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="location.cep" render={({ field }) => (
-          <FormItem>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="p-1.5 bg-primary/20 rounded-lg">
-                <MapPin className="w-4 h-4 text-primary" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-bold">CEP</FormLabel>
-              <InfoTooltip description="Obrigatório. Código de Endereçamento Postal para busca automática de endereço." />
-            </div>
+          <FormItem className="space-y-3">
+            <FormLabel className="text-lg font-semibold flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-primary" />
+              CEP
+              <InfoTooltip description="Código de Endereçamento Postal para busca automática de endereço." />
+              {isCepFilled && !loadingCep && (
+                <div className="ml-auto">
+                  <Check className="h-5 w-5 text-green-600" />
+                </div>
+              )}
+            </FormLabel>
             <FormControl>
               <div className="relative">
                 <Input 
@@ -40,7 +49,7 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
                       fetchAddressByCep(e.target.value); 
                     } 
                   }} 
-                  className="h-11 sm:h-12 border-2 focus:border-primary rounded-lg transition-all pl-4 pr-12 font-medium text-sm sm:text-base"
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors"
                   disabled={loadingCep}
                 />
                 {loadingCep && (
@@ -50,140 +59,142 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
                 )}
               </div>
             </FormControl>
-            <FormMessage />
             {loadingCep && (
-              <p className="text-xs sm:text-sm text-primary font-medium flex items-center gap-2 mt-2 animate-pulse">
-                <span className="inline-block w-2 h-2 bg-primary rounded-full" />
-                Buscando endereço automaticamente...
+              <p className="text-sm text-muted-foreground">
+                Buscando endereço...
               </p>
             )}
-          </FormItem>
-        )} />
-      </UICard>
-
-      {/* Divisor Visual */}
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t-2 border-gray-200"></div>
-        </div>
-        <div className="relative flex justify-center">
-          <span className="px-4 text-xs font-semibold text-gray-500 bg-background dark:bg-primary rounded-2xl">
-            ENDEREÇO COMPLETO
-          </span>
-        </div>
-      </div>
-
-      {/* Street and Number */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
-        <FormField control={form.control} name="location.street" render={({ field }) => (
-          <FormItem className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 bg-blue-100 rounded-lg">
-                <Building2 className="w-4 h-4 text-blue-600" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-semibold">Rua/Logradouro</FormLabel>
-              <InfoTooltip description="Obrigatório. Nome da rua ou logradouro." />
-            </div>
-            <FormControl>
-              <Input 
-                {...field} 
-                placeholder="Ex: Av. Paulista"
-                className="h-10 sm:h-12 border-2 focus:border-primary rounded-lg transition-all text-sm sm:text-base" 
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
-        
-        <FormField control={form.control} name="location.number" render={({ field }) => (
-          <FormItem>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 bg-amber-100 rounded-lg">
-                <Hash className="w-4 h-4 text-amber-600" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-semibold">Número</FormLabel>
-              <InfoTooltip description="Obrigatório. Número do edifício ou estabelecimento." />
-            </div>
-            <FormControl>
-              <Input 
-                {...field} 
-                placeholder="123"
-                type="number" 
-                className="h-10 sm:h-12 border-2 focus:border-primary rounded-lg transition-all text-sm sm:text-base" 
-              />
-            </FormControl>
             <FormMessage />
           </FormItem>
         )} />
       </div>
 
-      {/* City and State */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <FormField control={form.control} name="location.city" render={({ field }) => (
-          <FormItem>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 bg-green-100 rounded-lg">
-                <MapPin className="w-4 h-4 text-green-600" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-semibold">Cidade</FormLabel>
-              <InfoTooltip description="Obrigatório. Nome da cidade." />
-            </div>
-            <FormControl>
-              <Input 
-                {...field} 
-                placeholder="Ex: São Paulo"
-                className="h-10 sm:h-12 border-2 focus:border-primary rounded-lg transition-all text-sm sm:text-base" 
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
-        
-        <FormField control={form.control} name="location.state" render={({ field }) => (
-          <FormItem>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 bg-purple-100 rounded-lg">
-                <MapPin className="w-4 h-4 text-purple-600" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-semibold">Estado</FormLabel>
-              <InfoTooltip description="Obrigatório. Sigla do estado (Ex: SP)." />
-            </div>
-            <FormControl>
-              <Input 
-                placeholder="SP" 
-                maxLength={2} 
-                {...field} 
-                className="h-10 sm:h-12 border-2 focus:border-primary rounded-lg transition-all uppercase text-sm sm:text-base font-semibold" 
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )} />
+      {/* Rua e Número - Grid 2 Colunas */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Rua - Ocupa 2 colunas */}
+        <div className={`md:col-span-2 p-6 rounded-xl transition-all duration-300 ${isStreetFilled ? 'bg-primary/5' : ''}`}>
+          <FormField control={form.control} name="location.street" render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-primary" />
+                Rua
+                <InfoTooltip description="Nome da rua ou logradouro." />
+                {isStreetFilled && (
+                  <div className="ml-auto">
+                    <Check className="h-5 w-5 text-green-600" />
+                  </div>
+                )}
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  {...field} 
+                  placeholder="Ex: Av. Paulista"
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors" 
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
+        </div>
+
+        {/* Número - Ocupa 1 coluna */}
+        <div className={`p-6 rounded-xl transition-all duration-300 ${isNumberFilled ? 'bg-primary/5' : ''}`}>
+          <FormField control={form.control} name="location.number" render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                <Hash className="h-5 w-5 text-primary" />
+                Número
+                <InfoTooltip description="Número do estabelecimento." />
+                {isNumberFilled && (
+                  <div className="ml-auto">
+                    <Check className="h-5 w-5 text-green-600" />
+                  </div>
+                )}
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  {...field} 
+                  placeholder="123"
+                  type="number" 
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors" 
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
+        </div>
       </div>
 
-      {/* Divisor Visual */}
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t-2 border-gray-200"></div>
+      {/* Cidade e Estado - Grid 2 Colunas */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {/* Cidade - Ocupa 3 colunas */}
+        <div className={`md:col-span-3 p-6 rounded-xl transition-all duration-300 ${isCityFilled ? 'bg-primary/5' : ''}`}>
+          <FormField control={form.control} name="location.city" render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
+                Cidade
+                <InfoTooltip description="Nome da cidade." />
+                {isCityFilled && (
+                  <div className="ml-auto">
+                    <Check className="h-5 w-5 text-green-600" />
+                  </div>
+                )}
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  {...field} 
+                  placeholder="Ex: São Paulo"
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors" 
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
         </div>
-        <div className="relative flex justify-center">
-          <span className="px-4 text-xs font-semibold text-gray-500 bg-background dark:bg-primary rounded-2xl">
-            CAPACIDADE
-          </span>
+
+        {/* Estado - Ocupa 1 coluna */}
+        <div className={`p-6 rounded-xl transition-all duration-300 ${isStateFilled ? 'bg-primary/5' : ''}`}>
+          <FormField control={form.control} name="location.state" render={({ field }) => (
+            <FormItem className="space-y-2">
+              <FormLabel className="text-lg font-semibold flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
+                UF
+                <InfoTooltip description="Sigla do estado (Ex: SP)." />
+                {isStateFilled && (
+                  <div className="ml-auto">
+                    <Check className="h-5 w-5 text-green-600" />
+                  </div>
+                )}
+              </FormLabel>
+              <FormControl>
+                <Input 
+                  placeholder="SP" 
+                  maxLength={2} 
+                  {...field} 
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors uppercase" 
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )} />
         </div>
       </div>
 
-      {/* Capacity com Card Destacado */}
-      <UICard className="p-4 sm:p-5 border-2 border-primary/30  from-primary/5 to-transparent shadow-md hover:shadow-lg transition-shadow">
+      {/* Capacidade */}
+      <div className={`p-6 rounded-xl transition-all duration-300 ${isCapacityFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="capacity" render={({ field }) => (
-          <FormItem>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="p-1.5 bg-indigo-100 rounded-lg">
-                <Users className="w-4 h-4 text-indigo-600" />
-              </div>
-              <FormLabel className="text-sm sm:text-base font-bold">Capacidade Máxima</FormLabel>
-              <InfoTooltip description="Obrigatório. O número máximo de clientes que o local suporta simultaneamente." />
-            </div>
+          <FormItem className="space-y-3">
+            <FormLabel className="text-lg font-semibold flex items-center gap-2">
+              <Users className="h-5 w-5 text-primary" />
+              Capacidade Máxima
+              <InfoTooltip description="Número máximo de clientes que o local suporta simultaneamente." />
+              {isCapacityFilled && (
+                <div className="ml-auto">
+                  <Check className="h-5 w-5 text-green-600" />
+                </div>
+              )}
+            </FormLabel>
             <FormControl>
               <div className="relative">
                 <Input 
@@ -193,20 +204,17 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
                   onChange={(e) => field.onChange(e.target.value)} 
                   placeholder="Ex: 50"
                   min="1"
-                  className="h-11 sm:h-12 border-2 focus:border-indigo-500 rounded-lg transition-all text-sm sm:text-base font-medium" 
+                  className="h-12 text-base border-border/40 focus:border-primary transition-colors" 
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <span className="text-xs sm:text-sm text-gray-400 font-medium">pessoas</span>
+                  <span className="text-sm text-muted-foreground">pessoas</span>
                 </div>
               </div>
             </FormControl>
-            <p className="text-xs text-gray-500 mt-2">
-              Informe o número máximo de clientes que podem ser atendidos ao mesmo tempo
-            </p>
             <FormMessage />
           </FormItem>
         )} />
-      </UICard>
+      </div>
     </div>
   );
 }
