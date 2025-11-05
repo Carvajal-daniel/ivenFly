@@ -70,7 +70,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Conteúdo */}
-      <main className="flex-1 overflow-auto animate-fade-in p-6">{children}</main>
+      <main className="flex-1 overflow-auto animate-fade-in p-4">{children}</main>
     </div>
   );
 }

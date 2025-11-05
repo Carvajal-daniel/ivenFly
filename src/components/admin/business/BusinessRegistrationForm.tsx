@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, useCallback } from "react";
 import { useForm, Path } from "react-hook-form";
@@ -14,6 +15,7 @@ import {
   ArrowRight,
   Sparkles,
   Briefcase,
+  Loader2, // spinner
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -25,14 +27,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 
 import { formSchema, type FormValues } from "./form-schema";
 import { StepOneBasicInfo } from "./steps/step-one-basic";
@@ -43,7 +37,9 @@ import { StepFiveMarketing } from "./steps/step-five-marketing";
 import { StepSixHours } from "./steps/step-six-hours";
 import { createBusiness } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import { SuccessMessage } from "./success-message.tsxsuccess-message";
+import { SuccessMessage } from "./success-message";
+import { ConfirmationDialog } from "./ConfirmationDioalog"; 
+import ErrorDialog from "@/components/ErrorDialog";
 
 const FIELDS_BY_STEP: Record<
   number,
@@ -73,6 +69,14 @@ export function BusinessRegistrationForm() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedBusinessName, setSubmittedBusinessName] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // estado do dialog de erro
+  const [errorDialog, setErrorDialog] = useState<{
+    open: boolean;
+    title?: string;
+    message: string;
+  }>({ open: false, title: "Limite Atingido", message: "" });
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -117,6 +121,7 @@ export function BusinessRegistrationForm() {
   const selectedNiche = form.watch("niche");
   const usesSocialMedia = form.watch("usesSocialMedia");
 
+  // Busca CEP
   const fetchAddressByCep = async (cep: string) => {
     if (!cep) return;
     const cleanCep = cep.replace(/\D/g, "");
@@ -155,6 +160,7 @@ export function BusinessRegistrationForm() {
     }
   };
 
+  // Preço médio
   const calculateAveragePrice = useCallback(() => {
     const minRaw = form.watch("minServicePrice");
     const maxRaw = form.watch("maxServicePrice");
@@ -165,6 +171,7 @@ export function BusinessRegistrationForm() {
       : "0.00";
   }, [form]);
 
+  // Submit final
   const onSubmit = async (data: FormValues) => {
     const avgServicePrice = calculateAveragePrice();
     const finalData = { ...data, avgServicePrice: parseFloat(avgServicePrice) };
@@ -175,9 +182,32 @@ export function BusinessRegistrationForm() {
       toast.success("Negócio cadastrado com sucesso!");
       setSubmittedBusinessName(data.name);
       setShowSuccess(true);
-    } else {
-      toast.error(response.error || "Erro ao cadastrar o negócio.");
+      return;
     }
+
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    // Na falha: se a mensagem indicar LIMITE, abre Dialog. Caso contrário, mantém toast.
+    const msg = response.error || "Erro ao cadastrar o negócio.";
+    const normalized = msg.toLowerCase();
+
+    const isLimitExceeded =
+      normalized.includes("limite") ||
+      normalized.includes("excedido") ||
+      normalized.includes("atingido") ||
+      normalized.includes("quota") ||
+      normalized.includes("quota excedida") ||
+      normalized.includes("rate limit");
+
+    if (isLimitExceeded) {
+      setErrorDialog({
+        open: true,
+        title: "Limite Atingido",
+        message: msg,
+      });
+    } else {
+      toast.error(msg);
+    }
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   };
 
   const handleCloseSuccess = () => {
@@ -217,9 +247,16 @@ export function BusinessRegistrationForm() {
     setShowConfirm(true);
   };
 
+  // controla estado de envio durante a confirmação
   const confirmAndSubmit = async () => {
+    if (isSubmitting) return; // evita clique duplo
+    setIsSubmitting(true);
     setShowConfirm(false);
-    await form.handleSubmit(onSubmit)();
+    try {
+      await form.handleSubmit(onSubmit)();
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const prevStep = () => setStep(step - 1);
@@ -256,112 +293,10 @@ export function BusinessRegistrationForm() {
     }
   };
 
-  // dados do resumo (para o diálogo)
-  const v = form.watch();
-  const avg = Number(calculateAveragePrice());
-  const amenityList = Object.entries(v.amenities || {})
-    .filter(([_, val]) => (typeof val === "boolean" ? val : Boolean(val)))
-    .map(([k]) => k);
-
-  const sections = [
-    {
-      icon: Building2,
-      title: "Informações Básicas",
-      items: [
-        { label: "Nome", value: v.name },
-        { label: "Nicho", value: v.niche },
-        { label: "Descrição", value: v.description },
-        { label: "Tempo de operação", value: v.operatingYears },
-      ],
-    },
-    {
-      icon: MapPin,
-      title: "Localização",
-      items: [
-        {
-          label: "Endereço",
-          value: [
-            v.location?.street,
-            v.location?.number,
-            v.location?.city,
-            v.location?.state,
-            v.location?.cep,
-          ]
-            .filter(Boolean)
-            .join(", "),
-        },
-        {
-          label: "Capacidade",
-          value: v.capacity ? `${v.capacity} pessoas` : "—",
-        },
-      ],
-    },
-    {
-      icon: Briefcase,
-      title: "Serviços & Equipe",
-      items: [
-        { label: "Serviços", value: `${v.services?.length || 0} selecionado(s)` },
-        { label: "Funcionários", value: v.employees },
-        {
-          label: "Comodidades",
-          value: amenityList.length ? amenityList.join(", ") : "Nenhuma",
-        },
-      ],
-    },
-    {
-      icon: DollarSign,
-      title: "Financeiro",
-      items: [
-        {
-          label: "Preço mínimo",
-          value: `R$ ${Number(v.minServicePrice || 0).toFixed(2)}`,
-        },
-        {
-          label: "Preço máximo",
-          value: `R$ ${Number(v.maxServicePrice || 0).toFixed(2)}`,
-        },
-        { label: "Preço médio", value: `R$ ${avg.toFixed(2)}` },
-        { label: "Relatórios", value: v.reportFrequency },
-      ],
-    },
-    {
-      icon: Sparkles,
-      title: "Marketing",
-      items: [
-        { label: "Redes sociais", value: v.usesSocialMedia ? "Sim" : "Não" },
-        ...(v.usesSocialMedia
-          ? [
-              {
-                label: "Plataformas",
-                value: v.socialPlatforms?.join(", ") || "—",
-              },
-              { label: "Frequência", value: v.postingFrequency },
-            ]
-          : []),
-        { label: "Desafios", value: v.challenges },
-      ],
-    },
-    {
-      icon: Clock,
-      title: "Horários",
-      items: [
-        {
-          label: "Funcionamento",
-          value: v.businessHours?.length
-            ? `${v.businessHours.length} período(s) configurado(s)`
-            : "Não configurado",
-        },
-      ],
-    },
-  ];
-
   return (
     <>
-      {/* Página fluida, sem travar altura/overflow */}
-      <div className=" py-1">
+      <div className="py-1">
         <div className="max-w-5xl mx-auto">
-         
-
           <Card className="w-full shadow-2xl md:mt-40 mt-30">
             <Form {...form}>
               <form>
@@ -380,8 +315,8 @@ export function BusinessRegistrationForm() {
                             key={stepNum}
                             type="button"
                             onClick={() => stepNum <= step && setStep(stepNum)}
-                            disabled={stepNum > step}
-                            className={`p-2.5 rounded-lg transition-all duration-200 ${
+                            disabled={stepNum > step || isSubmitting}
+                            className={`p-2 rounded-lg transition-all duration-200 ${
                               isActive
                                 ? "bg-primary text-white scale-110 shadow-lg"
                                 : isCompleted
@@ -408,6 +343,7 @@ export function BusinessRegistrationForm() {
                       variant="outline"
                       onClick={prevStep}
                       className="flex-1 h-11"
+                      disabled={isSubmitting}
                     >
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Voltar
@@ -419,6 +355,7 @@ export function BusinessRegistrationForm() {
                       type="button"
                       onClick={nextStep}
                       className={`h-11 ${step === 1 ? "w-full" : "flex-1"}`}
+                      disabled={isSubmitting}
                     >
                       Próximo
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -428,9 +365,20 @@ export function BusinessRegistrationForm() {
                       type="button"
                       onClick={handleFinalSubmit}
                       className="flex-1 h-11"
+                      disabled={isSubmitting}
+                      aria-live="polite"
                     >
-                      <CheckCircle2 className="mr-2 h-4 w-4" />
-                      Finalizar
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Cadastrando...
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle2 className="mr-2 h-4 w-4" />
+                          Finalizar
+                        </>
+                      )}
                     </Button>
                   )}
                 </CardFooter>
@@ -440,96 +388,30 @@ export function BusinessRegistrationForm() {
         </div>
       </div>
 
-      {/* DIÁLOGO DE CONFIRMAÇÃO — responsivo, duas colunas no desktop, header/footer fixos, scroll interno adequado ao mobile */}
-     {/* Diálogo de Confirmação — footer fixo no rodapé do modal */}
-<Dialog open={showConfirm} onOpenChange={setShowConfirm}>
-  <DialogContent
-    className="
-      w-[calc(100vw-2rem)]
-      sm:max-w-lg
-      md:max-w-2xl
-      lg:max-w-4xl
-      xl:max-w-5xl
-      p-0
-      flex flex-col
-      max-h-[85dvh]
-    "
-  >
-    {/* Header normal */}
-    <DialogHeader className="p-6 border-b">
-      <DialogTitle className="text-2xl font-bold flex items-center gap-2">
-        <CheckCircle2 className="h-6 w-6 text-primary" />
-        Confirmar Cadastro
-      </DialogTitle>
-      <DialogDescription className="text-base">
-        Revise as informações antes de finalizar o cadastro do negócio
-      </DialogDescription>
-    </DialogHeader>
+      {/* Diálogo de confirmação */}
+      <ConfirmationDialog
+        showConfirm={showConfirm}
+        setShowConfirm={setShowConfirm}
+        confirmAndSubmit={confirmAndSubmit}
+        formValues={form.watch()}
+        calculateAveragePrice={calculateAveragePrice}
+      />
 
-    {/* CONTEÚDO rola; ocupa o espaço entre header e footer */}
-    <div className="flex-1 overflow-y-auto p-6">
-      <div className="grid gap-4 lg:grid-cols-2">
-        {sections.map((section, idx) => {
-          const Icon = section.icon;
-          return (
-            <div
-              key={idx}
-              className="p-4 rounded-xl border-2 border-border/40 bg-muted/30"
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <div className="p-1.5 bg-primary/10 rounded-lg">
-                  <Icon className="h-4 w-4 text-primary" />
-                </div>
-                <h3 className="font-semibold text-base">{section.title}</h3>
-              </div>
-
-              <div className="space-y-2 ml-7">
-                {section.items.map((item, itemIdx) => (
-                  <div key={itemIdx} className="flex justify-between gap-4">
-                    <span className="text-sm text-muted-foreground min-w-[120px]">
-                      {item.label}:
-                    </span>
-                    <span className="text-sm font-medium text-right flex-1">
-                      {item.value || "—"}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-
-    {/* Footer SEM sticky: fica sempre no final do DialogContent */}
-    <DialogFooter className="p-6 border-t gap-2">
-      <Button
-        type="button"
-        variant="outline"
-        onClick={() => setShowConfirm(false)}
-        className="h-11"
-      >
-        Voltar e Editar
-      </Button>
-      <Button
-        type="button"
-        onClick={confirmAndSubmit}
-        className="h-11 bg-primary hover:bg-primary/90"
-      >
-        <CheckCircle2 className="mr-2 h-4 w-4" />
-        Confirmar Cadastro
-      </Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
-
-
+      {/* Sucesso */}
       {showSuccess && (
         <SuccessMessage
           businessName={submittedBusinessName}
           onClose={handleCloseSuccess}
         />
       )}
+
+      {/* Erro crítico (ex.: limite excedido) */}
+      <ErrorDialog
+        open={errorDialog.open}
+        onClose={() => setErrorDialog((s) => ({ ...s, open: false }))}
+        title={errorDialog.title}
+        message={errorDialog.message}
+      />
     </>
   );
 }

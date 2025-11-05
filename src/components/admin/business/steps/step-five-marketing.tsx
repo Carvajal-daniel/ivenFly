@@ -34,7 +34,7 @@ export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingPr
     <div className="max-w-[50rem] mx-auto space-y-6">
 
       {/* 1. TOGGLE DE REDES SOCIAIS */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isSocialMediaFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isSocialMediaFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="usesSocialMedia" render={({ field }) => (
           <FormItem className="space-y-3">
             <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingPr
       {usesSocialMedia && (
         <>
           {/* Plataformas de Redes Sociais */}
-          <div className={`p-6 rounded-xl transition-all duration-300 ${isPlatformsFilled ? 'bg-primary/5' : ''}`}>
+          <div className={`p-4 rounded-xl transition-all duration-300 ${isPlatformsFilled ? 'bg-primary/5' : ''}`}>
             <div className="space-y-4">
               <FormLabel className="text-lg font-semibold flex items-center gap-2">
                 <Hash className="h-5 w-5 text-primary" />
@@ -139,7 +139,7 @@ export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingPr
           </div>
 
           {/* Frequência de Postagens */}
-          <div className={`p-6 rounded-xl transition-all duration-300 ${isFrequencyFilled ? 'bg-primary/5' : ''}`}>
+          <div className={`p-4 rounded-xl transition-all duration-300 ${isFrequencyFilled ? 'bg-primary/5' : ''}`}>
             <FormField control={form.control} name="postingFrequency" render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel className="text-lg font-semibold flex items-center gap-2">
@@ -181,7 +181,7 @@ export function StepFiveMarketing({ form, usesSocialMedia }: StepFiveMarketingPr
       )}
 
       {/* 3. DESAFIOS */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isChallengesFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isChallengesFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="challenges" render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="text-lg font-semibold flex items-center gap-2">

@@ -119,7 +119,7 @@ export function BusinessHoursSelector({ form }: BusinessHoursSelectorProps) {
   return (
     <div className="max-w-[50rem] mx-auto space-y-6">
       {/* Header */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isConfigured ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isConfigured ? 'bg-primary/5' : ''}`}>
         <FormLabel className="text-lg font-semibold flex items-center gap-2">
           <Clock className="h-5 w-5 text-primary" />
           Horário de Funcionamento
@@ -147,7 +147,7 @@ export function BusinessHoursSelector({ form }: BusinessHoursSelectorProps) {
       </div>
 
       {/* Quick Actions */}
-      <div className="p-6 rounded-xl bg-accent/30">
+      <div className="p-4 rounded-xl bg-accent/30">
         <FormLabel className="text-base font-semibold mb-4 block">
           Atalhos Rápidos
         </FormLabel>

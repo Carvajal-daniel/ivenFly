@@ -25,7 +25,7 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
     <div className="max-w-[50rem] mx-auto space-y-6">
       
       {/* CEP */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isCepFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isCepFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="location.cep" render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="text-lg font-semibold flex items-center gap-2">
@@ -98,7 +98,7 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
         </div>
 
         {/* Número - Ocupa 1 coluna */}
-        <div className={`p-6 rounded-xl transition-all duration-300 ${isNumberFilled ? 'bg-primary/5' : ''}`}>
+        <div className={`p-4 rounded-xl transition-all duration-300 ${isNumberFilled ? 'bg-primary/5' : ''}`}>
           <FormField control={form.control} name="location.number" render={({ field }) => (
             <FormItem className="space-y-3">
               <FormLabel className="text-lg font-semibold flex items-center gap-2">
@@ -154,7 +154,7 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
         </div>
 
         {/* Estado - Ocupa 1 coluna */}
-        <div className={`p-6 rounded-xl transition-all duration-300 ${isStateFilled ? 'bg-primary/5' : ''}`}>
+        <div className={`p-4 rounded-xl transition-all duration-300 ${isStateFilled ? 'bg-primary/5' : ''}`}>
           <FormField control={form.control} name="location.state" render={({ field }) => (
             <FormItem className="space-y-2">
               <FormLabel className="text-lg font-semibold flex items-center gap-2">
@@ -182,7 +182,7 @@ export function StepTwoLocation({ form, fetchAddressByCep, loadingCep }: StepTwo
       </div>
 
       {/* Capacidade */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isCapacityFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isCapacityFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="capacity" render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="text-lg font-semibold flex items-center gap-2">

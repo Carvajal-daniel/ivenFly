@@ -27,7 +27,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
     <div className="max-w-[51rem] mx-auto space-y-6">
       
       {/* Receita e Despesas */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isCashFlowFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isCashFlowFilled ? 'bg-primary/5' : ''}`}>
         <div className="flex items-center gap-2 mb-4">
           <h4 className="text-lg font-semibold">
             Fluxo de Caixa
@@ -100,7 +100,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
       </div>
 
       {/* Preço Mínimo e Máximo */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isPricingFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isPricingFilled ? 'bg-primary/5' : ''}`}>
         <div className="flex items-center gap-2 mb-4">
           <h4 className="text-lg font-semibold">
             Faixa de Preços dos Serviços
@@ -172,7 +172,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
 
         {/* Preço Médio Calculado */}
         {isPricingFilled && (
-          <div className="mt-6 p-6 bg-primary/10 rounded-xl border-2 border-primary/20">
+          <div className="mt-6 p-4 bg-primary/10 rounded-xl border-2 border-primary/20">
             <div className="text-center space-y-2">
               <p className="text-sm font-semibold text-muted-foreground">
                 Preço Médio Estimado
@@ -189,7 +189,7 @@ export function StepFourFinancial({ form, calculateAveragePrice }: StepFourFinan
       </div>
 
       {/* Frequência de Relatórios */}
-      <div className={`p-6 rounded-xl transition-all duration-300 ${isReportFrequencyFilled ? 'bg-primary/5' : ''}`}>
+      <div className={`p-4 rounded-xl transition-all duration-300 ${isReportFrequencyFilled ? 'bg-primary/5' : ''}`}>
         <FormField control={form.control} name="reportFrequency" render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="text-lg font-semibold flex items-center gap-2">

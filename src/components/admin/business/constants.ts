@@ -1,10 +1,27 @@
 // --- CONSTANTES ---
 
 export const NICHES = [
-  "Barbearia", "Salão de Beleza", "Loja de Roupas", "Loja de Eletrônicos", "Lanchonete", "Açaiteria",
+  "Barbearia",
+  "Salão de Beleza",
+  "Loja de Roupas",
+  "Loja de Eletrônicos",
+  "Lanchonete",
+  "Açaiteria",
 ] as const;
 
-export const FOOD_CLOTHING_NICHES = ["Lanchonete", "Açaiteria", "Loja de Roupas"];
+// helper p/ o z.enum exigir uma tupla não-vazia
+type NonEmptyStringTuple<T extends readonly string[]> =
+  T extends readonly [string, ...string[]] ? T : never;
+
+// exporta a tupla no formato exato que o z.enum precisa
+export const NICHES_TUPLE = NICHES as NonEmptyStringTuple<typeof NICHES>;
+
+// tipo com os nichos pré-definidos
+export type NichePreset = typeof NICHES[number];
+
+export const FOOD_CLOTHING_NICHES = ["Lanchonete", "Açaiteria", "Loja de Roupas"] as const;
+
+
 
 export const SERVICES_BY_NICHE: Record<string, string[]> = {
   Barbearia: [
@@ -35,4 +52,4 @@ export const DAYS = [
   { value: "Friday", label: "Sexta-feira" },
   { value: "Saturday", label: "Sábado" },
   { value: "Sunday", label: "Domingo" },
-];
+] as const;
