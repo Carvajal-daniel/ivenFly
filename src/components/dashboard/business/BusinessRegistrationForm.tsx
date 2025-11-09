@@ -14,7 +14,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Sparkles,
-  Briefcase,
   Loader2, // spinner
 } from "lucide-react";
 

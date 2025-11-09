@@ -1,4 +1,4 @@
-import { BusinessRegistrationForm } from "@/components/admin/business/BusinessRegistrationForm";
+import { BusinessRegistrationForm } from "@/components/dashboard/business/BusinessRegistrationForm";
 
 const Index = () => {
   return(

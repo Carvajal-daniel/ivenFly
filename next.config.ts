@@ -13,8 +13,6 @@ const nextConfig: NextConfig = {
         // Vamos usar /api/proxy/
         source: '/api/proxy/:path*', 
         
-        // 2. O DESTINO REAL da sua API.
-        // O :path* garante que /dashboard vá para /api/dashboard
         destination: 'https://api.uplys.com.br/api/:path*', 
       },
     ];

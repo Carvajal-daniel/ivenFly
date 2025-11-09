@@ -1,5 +1,5 @@
 // src/lib/api/business.ts
-import type { FormValues } from "@/components/admin/business/form-schema";
+import type { FormValues } from "@/components/dashboard/business/form-schema";
 import type { ApiResponse } from "@/types/api.types";
 
 export const createBusiness = async (data: FormValues): Promise<ApiResponse> => {
